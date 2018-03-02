@@ -3,8 +3,8 @@ package functionality;
 import data.ObjectTransfer;
 
 public class Functionality {
-	ObjectTransfer d;
-	Weight_Translate w;
+	private ObjectTransfer d;
+	private Weight_Translate w;
 	
 	public Functionality(){
 		d = new data.ObjectTransfer();

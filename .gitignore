@@ -2,48 +2,27 @@
 users.sav
 
 ### IntelliJ
-
 # User-specific stuff:
-
 .idea/**/workspace.xml
-
 .idea/**/tasks.xml
-
 .idea/dictionaries
- 
 
 # Sensitive or high-churn files:
-
 .idea/**/dataSources/
-
 .idea/**/dataSources.ids
-
 .idea/**/dataSources.xml
-
 .idea/**/dataSources.local.xml
-
 .idea/**/sqlDataSources.xml
-
 .idea/**/dynamic.xml
-
 .idea/**/uiDesigner.xml
 
-
-
 ### Maven
-
 /target/
 
-
-
 ### macOS
-
 .DS_Store
 
-
-
 ### Windows
-
 # Windows thumbnail cache files
 Thumbs.db
 ehthumbs.db
@@ -68,7 +47,6 @@ $RECYCLE.BIN/
 *.lnk
 
 ### Eclipse ###
-
 .metadata
 bin/
 tmp/
@@ -80,53 +58,11 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
-
-# CDT-specific (C/C++ Development Tooling)
-.cproject
-
-# Java annotation processor (APT)
-.factorypath
-
-# PDT-specific (PHP Development Tools)
-.buildpath
-
-# sbteclipse plugin
-.target
-
-# Tern plugin
-.tern-project
-
-# TeXlipse plugin
-.texlipse
-
-# STS (Spring Tool Suite)
-.springBeans
-
-# Code Recommenders
-.recommenders/
-
-# Scala IDE specific (Scala & Java development for Eclipse)
-.cache-main
-.scala_dependencies
-.worksheet
+.launch
+.project
 
 ### Eclipse Patch ###
-# Eclipse Core		
-.project
+# Eclipse Core
 
 # JDT-specific (Eclipse Java Development Tools)		
 .classpath
-
-# Project save-files
-.sav
-*.sav
-users.sav

@@ -51,9 +51,9 @@ public class Weight_Translate {
 		System.out.println(read.readLine());
 
 		// insure leak and close everything
-		write.close();
+		/*write.close();
 		read.close();
-		socket.close();
+		socket.close();*/
 	}
 
 	/**
@@ -77,9 +77,9 @@ public class Weight_Translate {
 		System.out.println(read.readLine());
 		
 		//Closes reader, writer and socket objects
-		write.close();
+		/*write.close();
 		read.close();
-		socket.close();
+		socket.close();*/
 	}
 
 	/**
@@ -87,24 +87,28 @@ public class Weight_Translate {
 	 */
 	public String getInputWithMsg(String message) throws WeightException, IOException {
 		//Sends message to weight with a given message
-		write.println("RM20 8 \" + message + \" \"\"  \"&3\"");
+		write.println("RM20 8 "+ message +" \"\"  \"&3\"");
 		
 		//Reads the input the user respons with
-		read.readLine();
+		System.out.println(read.readLine());
 		
 		String response = read.readLine();
-		System.out.println(response);
+		
+		//creates a string that only consists of the numbers in response
+		String resultString = response.substring(8, (response.length()-1));
+		System.out.println(resultString);
 	
-		return response;
+		return resultString;
 	}
 
 	/**
 	 * Trækker information om nuværende vægt-info
 	 * 
 	 * @return vægt i double
+	 * @throws IOException 
 	 */
-	public double getWeight() throws WeightException {
-
+	public double getWeight() throws WeightException, IOException {
+		
 		return 0;
 	}
 

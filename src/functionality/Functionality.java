@@ -21,6 +21,7 @@ public class Functionality {
 
 		try {
 			w.showMsg("Burhan");
+			w.getInputWithMsg("Indtast-nr.");
 		} catch (WeightException | IOException e) {
 			System.out.println("There was an error");
 			e.printStackTrace();

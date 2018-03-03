@@ -1,5 +1,7 @@
 package functionality;
 
+import java.io.IOException;
+
 import data.ObjectTransfer;
 
 public class Functionality {
@@ -17,6 +19,13 @@ public class Functionality {
 	 */
 	public void weightFlow(){
 
+		try {
+			w.showMsg("Burhan");
+		} catch (WeightException | IOException e) {
+			System.out.println("There was an error");
+			e.printStackTrace();
+		}
+		
 		// 1 - Vægten beder om, at der indtastes operatørnummer
 
 		// 2 - Operatøren indtaster sit brugernummer (område 11-99)

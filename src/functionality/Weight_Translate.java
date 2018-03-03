@@ -18,7 +18,7 @@ public class Weight_Translate {
 	// Denne klasse har direkte adgang til vægten
 	// ******************************************
 
-	public Weight_Translate() throws IOException {
+	public Weight_Translate() {
 
 		try {
 			// initialize the socket with the local IP-addr and right port
@@ -30,6 +30,7 @@ public class Weight_Translate {
 
 			// catch of exceptions
 		} catch (IOException e) {
+			e.printStackTrace();
 			return;
 		}
 
@@ -44,7 +45,7 @@ public class Weight_Translate {
 	 */
 	public void showMsg(String message) throws WeightException, IOException {
 		// write commands to the weight (open telnet)
-		write.println("D Burhan");
+		write.println("D "+ message);
 
 		// read the response of the weight
 		System.out.println(read.readLine());

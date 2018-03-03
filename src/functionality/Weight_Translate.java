@@ -103,8 +103,18 @@ public class Weight_Translate {
 	 * @throws IOException 
 	 */
 	public double getWeight() throws WeightException, IOException {
+		//S command retrieves weight
+		write.println("S");
 		
-		return 0;
+		String response = read.readLine();
+		
+		//extracts only the numbers from response to a string
+		String weightString = response.substring(9, (response.length()-2));
+		
+		//convert from string to double.
+		double weight = Double.parseDouble(weightString);
+		
+		return weight;
 	}
 
 	/**

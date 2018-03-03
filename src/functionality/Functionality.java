@@ -20,8 +20,9 @@ public class Functionality {
 	public void weightFlow(){
 
 		try {
-			w.showMsg("Burhan");
-			w.getInputWithMsg("Indtast-nr.");
+			//w.showMsg("Burhan");
+			//w.getInputWithMsg("Indtast-nr.");
+			w.getWeight();
 		} catch (WeightException | IOException e) {
 			System.out.println("There was an error");
 			e.printStackTrace();

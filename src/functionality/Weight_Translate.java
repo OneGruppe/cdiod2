@@ -38,9 +38,7 @@ public class Weight_Translate {
 
 	/**
 	 * Viser en besked på display
-	 * 
-	 * @param message
-	 *            Den besked der vises på UI.
+	 * @param message Den besked der vises på UI.
 	 * @throws IOException 
 	 */
 	public void showMsg(String message) throws WeightException, IOException {
@@ -58,12 +56,10 @@ public class Weight_Translate {
 
 	/**
 	 * Viser en lang besked på display
-	 * 
-	 * @param message
-	 *            Den besked der vises på UI.
+	 * @param message Den besked der vises på UI.
 	 */
 	public void showLongMsg(String message) throws WeightException {
-
+		
 	}
 
 	/**
@@ -103,7 +99,6 @@ public class Weight_Translate {
 
 	/**
 	 * Trækker information om nuværende vægt-info
-	 * 
 	 * @return vægt i double
 	 * @throws IOException 
 	 */
@@ -114,11 +109,9 @@ public class Weight_Translate {
 
 	/**
 	 * Trækker information om nuværende Tara-vægt
-	 * 
 	 * @return Tara vægt i double
 	 */
 	public double getTaraWeight() throws WeightException {
-
 		return 0;
 	}
 }

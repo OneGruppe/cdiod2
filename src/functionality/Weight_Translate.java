@@ -85,9 +85,17 @@ public class Weight_Translate {
 	/**
 	 * Skriver en besked til UI, og får en besked tilbage fra vægt.
 	 */
-	public String getInputWithMsg(String message) throws WeightException {
-
-		return null;
+	public String getInputWithMsg(String message) throws WeightException, IOException {
+		//Sends message to weight with a given message
+		write.println("RM20 8 \" + message + \" \"\"  \"&3\"");
+		
+		//Reads the input the user respons with
+		read.readLine();
+		
+		String response = read.readLine();
+		System.out.println(response);
+	
+		return response;
 	}
 
 	/**

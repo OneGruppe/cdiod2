@@ -69,8 +69,17 @@ public class Weight_Translate {
 	/**
 	 * Fjerner beskeden fra display
 	 */
-	public void removeMsg() throws WeightException {
-
+	public void removeMsg() throws WeightException, IOException {
+		//Write commends to the weight (open telnet)
+		write.println("DW");
+		
+		//Read the response from he weight
+		System.out.println(read.readLine());
+		
+		//Closes reader, writer and socket objects
+		write.close();
+		read.close();
+		socket.close();
 	}
 
 	/**

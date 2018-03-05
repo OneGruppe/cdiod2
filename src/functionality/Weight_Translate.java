@@ -38,90 +38,109 @@ public class Weight_Translate {
 
 	/**
 	 * Viser en besked på display
-	 * @param message Den besked der vises på UI.
-	 * @throws IOException 
+	 * 
+	 * @param message
+	 *            Den besked der vises på UI.
+	 * @throws IOException
 	 */
 	public void showMsg(String message) throws WeightException, IOException {
 		// write commands to the weight (open telnet)
-		write.println("D "+ message);
+		write.println("D " + message);
 
 		// read the response of the weight
 		System.out.println(read.readLine());
 
 		// insure leak and close everything
-		/*write.close();
-		read.close();
-		socket.close();*/
+		/*
+		 * write.close(); read.close(); socket.close();
+		 */
 	}
 
 	/**
 	 * Viser en lang besked på display
-	 * @param message Den besked der vises på UI.
+	 * 
+	 * @param message
+	 *            Den besked der vises på UI.
 	 */
 	public void showLongMsg(String message) throws WeightException {
-		
+
 	}
 
 	/**
 	 * Fjerner beskeden fra display
 	 */
 	public void removeMsg() throws WeightException, IOException {
-		//Write commends to the weight (open telnet)
+		// Write commends to the weight (open telnet)
 		write.println("DW");
-		
-		//Read the response from he weight
+
+		// Read the response from he weight
 		System.out.println(read.readLine());
-		
-		//Closes reader, writer and socket objects
-		/*write.close();
-		read.close();
-		socket.close();*/
+
+		// Closes reader, writer and socket objects
+		/*
+		 * write.close(); read.close(); socket.close();
+		 */
 	}
 
 	/**
 	 * Skriver en besked til UI, og får en besked tilbage fra vægt.
 	 */
 	public String getInputWithMsg(String message) throws WeightException, IOException {
-		//Sends message to weight with a given message
-		write.println("RM20 8 "+ message +" \"\"  \"&3\"");
-		
-		//Reads the input the user respons with
+		// Sends message to weight with a given message
+		write.println("RM20 8 " + message + " \"\"  \"&3\"");
+
+		// Reads the input the user respons with
 		System.out.println(read.readLine());
-		
+
 		String response = read.readLine();
-		
-		//creates a string that only consists of the numbers in response
-		String resultString = response.substring(8, (response.length()-1));
+
+		// creates a string that only consists of the numbers in response
+		String resultString = response.substring(8, (response.length() - 1));
 		System.out.println(resultString);
-	
+
 		return resultString;
 	}
 
 	/**
 	 * Trækker information om nuværende vægt-info
+	 * 
 	 * @return vægt i double
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public double getWeight() throws WeightException, IOException {
-		//S command retrieves weight
+		// S command retrieves weight
 		write.println("S");
-		
+
 		String response = read.readLine();
-		
-		//extracts only the numbers from response to a string
-		String weightString = response.substring(9, (response.length()-2));
-		
-		//convert from string to double.
+
+		// extracts only the numbers from response to a string
+		String weightString = response.substring(9, (response.length() - 2));
+
+		// convert from string to double.
 		double weight = Double.parseDouble(weightString);
-		
+
 		return weight;
 	}
 
 	/**
 	 * Trækker information om nuværende Tara-vægt
+	 * 
 	 * @return Tara vægt i double
+	 * @throws IOException 
 	 */
-	public double getTaraWeight() throws WeightException {
-		return 0;
+	public double getTaraWeight() throws WeightException, IOException {
+
+		// T command retrieves weight
+		write.println("T");
+
+		String response = read.readLine();
+
+		// extracts only the numbers from response to a string
+		String weightString = response.substring(9, (response.length() - 2));
+
+		// convert from string to double.
+		double weight = Double.parseDouble(weightString);
+
+		return weight;
 	}
 }

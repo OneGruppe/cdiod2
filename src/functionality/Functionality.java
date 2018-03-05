@@ -11,7 +11,6 @@ public class Functionality {
 	public Functionality(){
 		d = new data.ObjectTransfer();
 		w = new Weight_Translate();
-		weightFlow();
 	}
 	
 	/**
@@ -20,9 +19,10 @@ public class Functionality {
 	public void weightFlow(){
 
 		try {
-			w.showMsg("Burhan");
-			w.getInputWithMsg("Indtast-nr.");
-			w.getWeight();
+			//w.showMsg("ho");
+			//w.getInputWithMsg("Indtast noget");
+			//w.removeMsg();
+			System.out.println(w.getTaraWeight());
 		} catch (WeightException | IOException e) {
 			System.out.println("There was an error");
 			e.printStackTrace();

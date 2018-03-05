@@ -22,7 +22,11 @@ public class Weight_Translate {
 
 		try {
 			// initialize the socket with the local IP-addr and right port
-			socket = new Socket("127.0.0.1", 8000);
+			// Virtuel vægt
+			//socket = new Socket("127.0.0.1", 8000);
+			
+			// Den fysiske vægt(2)
+			socket = new Socket("169.254.2.3", 8000);
 
 			// initialize the writer and the reader with the socket output and input stream
 			write = new PrintWriter(socket.getOutputStream(), true);
@@ -45,7 +49,7 @@ public class Weight_Translate {
 	 */
 	public void showMsg(String message) throws WeightException, IOException {
 		// write commands to the weight (open telnet)
-		write.println("D " + message);
+		write.println("D "+ "\"" + message + "\"");
 
 		// read the response of the weight
 		System.out.println(read.readLine());
@@ -86,10 +90,10 @@ public class Weight_Translate {
 	 * Skriver en besked til UI, og får en besked tilbage fra vægt.
 	 */
 	public String getInputWithMsg(String message) throws WeightException, IOException {
-		// Sends message to weight with a given message
-		write.println("RM20 8 " + message + " \"\"  \"&3\"");
-
-		// Reads the input the user respons with
+		//Sends message to weight with a given message
+		write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
+		
+		//Reads the input the user respons with
 		System.out.println(read.readLine());
 
 		String response = read.readLine();

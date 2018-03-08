@@ -1,6 +1,29 @@
 package functionality;
 
+import java.util.ArrayList;
 
+import data.*;
+
+public class Functionality {
+	private ObjectTransfer d;
+	private Weight_Translate w;
+	
+	public Functionality(){
+		d = new ObjectTransfer();
+		w = new Weight_Translate();
+	}
+	
+	/**
+	 * Kører flow for vægten.
+	 */
+	public void weightFlow(){
+
+		try {		
+
+			// 1 - Vægten beder om, at der indtastes operatørnummer
+			// 2 - Operatøren indtaster sit brugernummer (område 11-99)
+				int userInput = w.getInputWithMsg("Indtast operatørnummer");
+					w.showLongMsg(d.isUserInDatabase(userInput));
 
 
 					
@@ -59,7 +82,8 @@ package functionality;
 					w.setTaraWeight();
 					
 					
-				} catch (WeightException e | InterruptedException e) {			System.out.println(e);
+				} catch (WeightException e| InterruptedException e) {
+			System.out.println(e);
 		}
 	}
 }

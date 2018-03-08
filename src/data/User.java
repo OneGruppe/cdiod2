@@ -9,4 +9,13 @@ public class User {
 		this.id = id;
 		this.name = name;
 	}
+
+	protected int getId() {
+		return id;
+	}
+
+	protected String getName() {
+		return name;
+	}
+	
 }

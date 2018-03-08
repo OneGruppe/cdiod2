@@ -99,10 +99,9 @@ public class Weight_Translate {
 	}
 
 	/**
-	 * Skriver en besked til UI, og får en besked tilbage fra vægt.
+	 * Skriver en besked til UI, og får en int tilbage fra vægt.
 	 */
-	public String getInputWithMsg(String message) throws WeightException {
-		
+	public int getInputWithMsg(String message) throws WeightException {
 		try {
 			//Sends message to weight with a given message
 			write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
@@ -113,10 +112,12 @@ public class Weight_Translate {
 			String response = read.readLine();
 
 			// creates a string that only consists of the numbers in response
-			String resultString = response.substring(8, (response.length() - 1));
-			System.out.println(resultString);
+			String InputString = response.substring(8, (response.length() - 1));
+			System.out.println(InputString);
 
-			return resultString;
+			int resultInt = Integer.parseInt(InputString);
+			
+			return resultInt;
 			
 		} catch(IOException e) {
 			

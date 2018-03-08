@@ -10,11 +10,11 @@ public class User {
 		this.name = name;
 	}
 
-	protected int getId() {
+	public int getId() {
 		return id;
 	}
 
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 	

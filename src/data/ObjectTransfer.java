@@ -22,10 +22,19 @@ public class ObjectTransfer {
 		batchlist.add(batch1);
 	}
 
-	public String isUserInDatabase(int userID) {
+	public User userInDatabase(int userID) {
 		for(User u: userlist) {
 			if(userID == u.getId()) {
-				return u.getName();
+				return u;
+			}
+		}
+		return null;
+	}
+
+	public Batch batchInDatabase(int batchID) {
+		for(Batch b: batchlist) {
+			if(batchID == b.getId()) {
+				return b;
 			}
 		}
 		return null;

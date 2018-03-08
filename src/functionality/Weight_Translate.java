@@ -158,7 +158,7 @@ public class Weight_Translate {
 	 * @return Tara vægt i double
 	 * @throws IOException 
 	 */
-	public double getTaraWeight() throws WeightException {
+	public double setTaraWeight() throws WeightException {
 		
 		try {
 			// T command retrieves weight

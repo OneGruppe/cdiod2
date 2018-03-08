@@ -1,6 +1,5 @@
 package functionality;
-
-import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import data.*;
 
@@ -33,8 +32,8 @@ public class Functionality {
 
 			// 5 - Vægten beder om, at der indtastes batch nummer (område 1000-9999)
 			// 6 - Operatør indtaster batch nummer
-			int userBatch = w.getInputWithMsg("Indtast batch nummer.");
-			d.batchInDatabase(userBatch);
+			int batchID = w.getInputWithMsg("Indtast batch nummer.");
+			d.batchInDatabase(batchID);
 
 			// 7 - Operatøren instrueres om, at vægten skal være ubelastet
 			w.showLongMsg("Fjern alt last fra vægten.");
@@ -54,10 +53,10 @@ public class Functionality {
 			w.getInputWithMsg("Indtast 1, for at kvittere.");
 
 			// 12 - Tara’s vægt registreres
-			d.batchInDatabase(2).addTaraWeight(w.getWeight());
+			d.batchInDatabase(batchID).addTaraWeight(w.getWeight());
 
 			// 13 - Vægten tareres
-			d.setTaraWeight();
+			w.setTaraWeight();
 
 			// 14 - Operatøren instrueres i at placere netto (beholder med produkt)  på vægten
 			w.showLongMsg("Placer beholder med produkt på vægten"); 
@@ -67,10 +66,10 @@ public class Functionality {
 			w.getInputWithMsg("Indtast 1, for at kvittere.");
 
 			// 16 - Nettovægt registreres
-			d.batchInDatabase(2).addNettoWeight(addedWeight); //Den givne kg på vægten?
+			d.batchInDatabase(batchID).addNettoWeight(2); //Den givne kg på vægten?
 
 			// 17 - Vægten tareres
-			d.setTaraWeight();
+			w.setTaraWeight();
 
 			// 18 - Operatøren instrueres i at fjerne brutto fra vægten
 			w.showLongMsg("Fjern produkt fra vægt");
@@ -80,7 +79,7 @@ public class Functionality {
 			w.getInputWithMsg("Indtast 1, for at kvittere.");
 
 			// 20 - Bruttovægt registreres (negativ)
-			d.batchInDatabase(2).addNettoWeight(d.batchInDatabase(2).getBruttoWeight()*-1);
+			d.batchInDatabase(batchID).addNettoWeight(d.batchInDatabase(2).getBruttoWeight()*-1);
 
 			// 21 - Der udskrives OK eller kasseret på vægten
 			w.showMsg("ok!");
@@ -93,7 +92,7 @@ public class Functionality {
 			w.setTaraWeight();
 
 
-		} catch (WeightException e| InterruptedException e) {
+		} catch (WeightException | InterruptedException e) {
 			System.out.println(e);
 		}
 	}

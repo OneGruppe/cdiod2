@@ -20,7 +20,7 @@ public class Batch {
 		return taraWeight;
 	}
 
-	public void addTaraWeight (dobule addedWeight) {
+	public void addTaraWeight (double addedWeight) {
 		taraWeight += addedWeight;
 	}
 

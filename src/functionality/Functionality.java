@@ -18,13 +18,11 @@ public class Functionality {
 	public void weightFlow(){
 
 		try {		
-
 			// 1 - Vægten beder om, at der indtastes operatørnummer
 			// 2 - Operatøren indtaster sit brugernummer (område 11-99)
 			int userInput = w.getInputWithMsg("Indtast operatørnummer");
-			w.showLongMsg(d.userInDatabase(userInput).getName());
-
 			// 3 - Operatørens navn findes i databasen og vises på vægten
+			w.showLongMsg(d.userInDatabase(userInput).getName());
 
 			// 4 - Operatøren kvitterer for at navnet er korrekt
 			TimeUnit.SECONDS.sleep(3);
@@ -43,10 +41,9 @@ public class Functionality {
 			w.getInputWithMsg("Indtast 1, for at kvittere.");
 
 			// 9 - Vægten tareres
-			w.setTaraWeight();
-
-			// 10 - Operatøren instrueres om, at placere tara (tom beholder)  på vægten7
+			// 10 - Operatøren instrueres om, at placere tara (tom beholder)  på vægten
 			w.showLongMsg("Placer en tom beholder på vægten");
+			w.setTaraWeight();
 
 			// 11 - Operatøren kvitterer
 			TimeUnit.SECONDS.sleep(3);

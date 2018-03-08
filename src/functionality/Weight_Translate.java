@@ -23,10 +23,10 @@ public class Weight_Translate {
 		try {
 			// initialize the socket with the local IP-addr and right port
 			// Virtuel vægt
-			//socket = new Socket("127.0.0.1", 8000);
+			socket = new Socket("127.0.0.1", 8000);
 			
 			// Den fysiske vægt(2)
-			socket = new Socket("169.254.2.3", 8000);
+			// socket = new Socket("169.254.2.3", 8000);
 
 			// initialize the writer and the reader with the socket output and input stream
 			write = new PrintWriter(socket.getOutputStream(), true);
@@ -47,17 +47,18 @@ public class Weight_Translate {
 	 *            Den besked der vises på UI.
 	 * @throws IOException
 	 */
-	public void showMsg(String message) throws WeightException, IOException {
-		// write commands to the weight (open telnet)
-		write.println("D "+ "\"" + message + "\"");
+	public void showMsg(String message) throws WeightException {
+		try {
+			// write commands to the weight (open telnet)
+			write.println("D "+ "\"" + message + "\"");
 
-		// read the response of the weight
-		System.out.println(read.readLine());
-
-		// insure leak and close everything
-		/*
-		 * write.close(); read.close(); socket.close();
-		 */
+			// read the response of the weight
+			System.out.println(read.readLine());
+			
+		} catch (IOException e) {
+			
+			throw new WeightException("Error showing message");
+		}
 	}
 
 	/**
@@ -67,42 +68,60 @@ public class Weight_Translate {
 	 *            Den besked der vises på UI.
 	 */
 	public void showLongMsg(String message) throws WeightException {
+		
+		write.println("P111 " + message);
+		
+		try {
+			System.out.println(read.readLine());
+		} 
+		catch (IOException e) {
+			throw new WeightException("Error showing long message");
+		}
 
 	}
 
 	/**
 	 * Fjerner beskeden fra display
 	 */
-	public void removeMsg() throws WeightException, IOException {
-		// Write commends to the weight (open telnet)
-		write.println("DW");
+	public void removeMsg() throws WeightException {
+		
+		try {
+			// Write commends to the weight (open telnet)
+			write.println("DW");
 
-		// Read the response from he weight
-		System.out.println(read.readLine());
-
-		// Closes reader, writer and socket objects
-		/*
-		 * write.close(); read.close(); socket.close();
-		 */
+			// Read the response from he weight
+			System.out.println(read.readLine());
+			
+		} catch (IOException e) {
+			
+			throw new WeightException("Error deleting message");
+		}
 	}
 
 	/**
 	 * Skriver en besked til UI, og får en besked tilbage fra vægt.
 	 */
-	public String getInputWithMsg(String message) throws WeightException, IOException {
-		//Sends message to weight with a given message
-		write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
+	public String getInputWithMsg(String message) throws WeightException {
 		
-		//Reads the input the user respons with
-		System.out.println(read.readLine());
+		try {
+			//Sends message to weight with a given message
+			write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
+			
+			//Reads the input the user respons with
+			System.out.println(read.readLine());
 
-		String response = read.readLine();
+			String response = read.readLine();
 
-		// creates a string that only consists of the numbers in response
-		String resultString = response.substring(8, (response.length() - 1));
-		System.out.println(resultString);
+			// creates a string that only consists of the numbers in response
+			String resultString = response.substring(8, (response.length() - 1));
+			System.out.println(resultString);
 
-		return resultString;
+			return resultString;
+			
+		} catch(IOException e) {
+			
+			throw new WeightException("Error getting the input");
+		}
 	}
 
 	/**
@@ -111,19 +130,25 @@ public class Weight_Translate {
 	 * @return vægt i double
 	 * @throws IOException
 	 */
-	public double getWeight() throws WeightException, IOException {
-		// S command retrieves weight
-		write.println("S");
+	public double getWeight() throws WeightException {
+		try {
+			// S command retrieves weight
+			write.println("S");
 
-		String response = read.readLine();
+			String response = read.readLine();
 
-		// extracts only the numbers from response to a string
-		String weightString = response.substring(9, (response.length() - 2));
+			// extracts only the numbers from response to a string
+			String weightString = response.substring(9, (response.length() - 2));
 
-		// convert from string to double.
-		double weight = Double.parseDouble(weightString);
+			// convert from string to double.
+			double weight = Double.parseDouble(weightString);
 
-		return weight;
+			return weight;
+			
+		} catch(IOException e) {
+			
+			throw new WeightException("Error showing weight");
+		}
 	}
 
 	/**
@@ -132,19 +157,37 @@ public class Weight_Translate {
 	 * @return Tara vægt i double
 	 * @throws IOException 
 	 */
-	public double getTaraWeight() throws WeightException, IOException {
+	public double getTaraWeight() throws WeightException {
+		
+		try {
+			// T command retrieves weight
+			write.println("T");
 
-		// T command retrieves weight
-		write.println("T");
+			String response = read.readLine();
 
-		String response = read.readLine();
+			// extracts only the numbers from response to a string
+			String weightString = response.substring(9, (response.length() - 2));
 
-		// extracts only the numbers from response to a string
-		String weightString = response.substring(9, (response.length() - 2));
+			// convert from string to double.
+			double weight = Double.parseDouble(weightString);
 
-		// convert from string to double.
-		double weight = Double.parseDouble(weightString);
-
-		return weight;
+			return weight;
+			
+		} catch (IOException e) {
+			
+			throw new WeightException("Error showing Tara weight");
+		}
+	}
+	
+	public void closeAllLeaks() throws WeightException {
+		
+		try {
+			socket.close();
+			write.close();
+			read.close();
+		} catch (IOException e) {
+			
+			throw new WeightException("Could not close connection");
+		}
 	}
 }

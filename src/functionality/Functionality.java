@@ -1,7 +1,5 @@
 package functionality;
 
-import java.io.IOException;
-
 import data.ObjectTransfer;
 
 public class Functionality {
@@ -19,13 +17,21 @@ public class Functionality {
 	public void weightFlow(){
 
 		try {
-			//w.showMsg("ho");
-			//w.getInputWithMsg("Indtast noget");
-			//w.removeMsg();
+		
+			w.showLongMsg("\"Sebastian Sebastiansen\"");
+			
+			w.getInputWithMsg("Indtast noget");
+			
+			w.removeMsg();
+			
 			System.out.println(w.getTaraWeight());
-		} catch (WeightException | IOException e) {
-			System.out.println("There was an error");
-			e.printStackTrace();
+			
+			w.closeAllLeaks();
+			
+		} catch (WeightException e) {
+			
+			System.out.println(e);
+			
 		}
 		
 		// 1 - Vægten beder om, at der indtastes operatørnummer

@@ -69,7 +69,7 @@ public class Weight_Translate {
 	 */
 	public void showLongMsg(String message) throws WeightException {
 		
-		write.println("P111 " + message);
+		write.println("P111 " + "\"" + message + "\"");
 		
 		try {
 			System.out.println(read.readLine());

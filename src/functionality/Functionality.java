@@ -1,7 +1,5 @@
 package functionality;
 
-import java.util.ArrayList;
-
 import data.*;
 
 public class Functionality {

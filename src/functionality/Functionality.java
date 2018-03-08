@@ -23,13 +23,13 @@ public class Functionality {
 			// 1 - Vægten beder om, at der indtastes operatørnummer
 			// 2 - Operatøren indtaster sit brugernummer (område 11-99)
 				int userInput = w.getInputWithMsg("Indtast operatørnummer");
-					w.showLongMsg(d.isUserInDatabase(userInput));
-
-
+					w.showLongMsg(d.userInDatabase(userInput).getName());
 					
 					// 3 - Operatørens navn findes i databasen og vises på vægten
 					
 					// 4 - Operatøren kvitterer for at navnet er korrekt
+					TimeUnit.SECONDS.sleep(3);
+					w.getInputWithMsg("Indtast 1, for at kvittere.");
 					
 					// 5 - Vægten beder om, at der indtastes batch nummer (område 1000-9999)
 					
@@ -38,6 +38,8 @@ public class Functionality {
 					// 7 - Operatøren instrueres om, at vægten skal være ubelastet
 					
 					// 8 - Operatøren kvitterer
+					TimeUnit.SECONDS.sleep(3);
+					w.getInputWithMsg("Indtast 1, for at kvittere.");
 					
 					// 9 - Vægten tareres
 					w.setTaraWeight();
@@ -46,6 +48,8 @@ public class Functionality {
 					w.showLongMsg("Placer en tom beholder på vægten");
 					
 					// 11 - Operatøren kvitterer
+					TimeUnit.SECONDS.sleep(3);
+					w.getInputWithMsg("Indtast 1, for at kvittere.");
 					
 					// 12 - Tara’s vægt registreres
 					d.batchInDatabase(2).addTaraWeight(w.getWeight());
@@ -57,6 +61,8 @@ public class Functionality {
 					w.showLongMsg("Placer beholder med produkt på vægten"); 
 					
 					// 15 - Operatøren kvitterer
+					TimeUnit.SECONDS.sleep(3);
+					w.getInputWithMsg("Indtast 1, for at kvittere.");
 					
 					// 16 - Nettovægt registreres
 					d.batchInDatabase(2).addNettoWeight(addedWeight); //Den givne kg på vægten?
@@ -76,8 +82,11 @@ public class Functionality {
 					
 					// 21 - Der udskrives OK eller kasseret på vægten
 					w.showMsg("ok!");
+					
 					// 22 - Operatøren kvitterer
-				
+					TimeUnit.SECONDS.sleep(3);
+					w.getInputWithMsg("Indtast 1, for at kvittere.");
+					
 					// 23 - Vægten tareres
 					w.setTaraWeight();
 					

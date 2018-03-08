@@ -5,11 +5,39 @@ public class Batch {
 	private int id;
 	private String desc;
 	private double bruttoWeight;
+	private double nettoWeight;
+	private double taraWeight;
 	
-	public Batch(int id, String desc, double bruttoWeight) {
+	public Batch(int id, String desc, double bruttoWeight, double nettoWeight, double taraWeight) {
+		this.taraWeight = taraWeight;
 		this.id = id;
 		this.desc = desc;
 		this.bruttoWeight = bruttoWeight;
+		this.nettoWeight = nettoWeight;
+	}
+
+	public double getTaraWeight () {
+		return taraWeight;
+	}
+
+	public void addTaraWeight (dobule addedWeight) {
+		taraWeight += addedWeight;
+	}
+
+	public void resetTaraWeught () {
+		taraWeight = 0;
+	}
+
+	public double getNettoWeight () {
+		return nettoWeight;
+	}
+
+	public void addNettoWeight (double addedWeight) {
+		nettoWeight += addedWeight;
+	}
+
+	public void resetNettoWeight () {
+		nettoWeight = 0;
 	}
 
 	public int getID() {

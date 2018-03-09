@@ -114,7 +114,9 @@ public class Weight_Translate {
 			// creates a string that only consists of the numbers in response
 			String InputString = response.substring(8, (response.length() - 1));
 			System.out.println(InputString);
-
+			if(InputString.equals("")) {
+				return 0;
+			}
 			int resultInt = Integer.parseInt(InputString);
 			
 			return resultInt;

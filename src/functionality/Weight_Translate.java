@@ -170,9 +170,9 @@ public class Weight_Translate {
             System.out.println("String successfully cut into: " + weightString);
 
             // convert from string to double.
-            System.out.println("Converts " + weightString " into double");
+            System.out.println("Converts " + weightString + " into double");
             double weight = Double.parseDouble(weightString);
-            System.out.println("Convertion successful" + weightString " is now double " + weight);
+            System.out.println("Convertion successful" + weightString + " is now double " + weight);
 
             return weight;
 
@@ -202,11 +202,11 @@ public class Weight_Translate {
 
             // extracts only the numbers from response to a string
             String weightString = response.substring(9, (response.length() - 2));
-            System.out.println("cuts " + response " into string " + weightString);
+            System.out.println("cuts " + response + " into string " + weightString);
 
             // convert from string to double.
             double weight = Double.parseDouble(weightString);
-            System.out.println("Converts " + weight " into double " + weight);
+            System.out.println("Converts " + weight + " into double " + weight);
 
             return weight;
 

@@ -18,7 +18,7 @@ public class ObjectTransfer {
 
 		//Batch
 		batchlist = new ArrayList<Batch>();
-		Batch batch1 = new Batch(d.getBatchid(), d.getBatchdesc());
+		Batch batch1 = new Batch(d.getBatchid(), d.getBatchdesc(), 0.0, 0.0, 0.0);
 		batchlist.add(batch1);
 	}
 
@@ -33,7 +33,7 @@ public class ObjectTransfer {
 
 	public Batch batchInDatabase(int batchID) {
 		for(Batch b: batchlist) {
-			if(batchID == b.getId()) {
+			if(batchID == b.getID()) {
 				return b;
 			}
 		}

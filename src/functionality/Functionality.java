@@ -20,7 +20,9 @@ public class Functionality {
 		try {		
 			// 1 - Vægten beder om, at der indtastes operatørnummer
 			// 2 - Operatøren indtaster sit brugernummer (område 11-99)
-			int userInput = w.getInputWithMsg("Indtast operatørnummer");
+			int userInput;
+			userInput = w.getInputWithMsg("Indtast operatørnummer");
+			System.out.println(userInput);
 			// 3 - Operatørens navn findes i databasen og vises på vægten
 			w.showLongMsg(d.userInDatabase(userInput).getName());
 

@@ -4,10 +4,12 @@ import java.util.concurrent.TimeUnit;
 import data.*;
 
 public class Functionality {
+	
 	private ObjectTransfer d;
 	private Weight_Translate w;
 
-	public Functionality(){
+	public Functionality() {
+		
 		d = new ObjectTransfer();
 		w = new Weight_Translate();
 	}
@@ -16,21 +18,28 @@ public class Functionality {
 	 * Kører flow for vægten.
 	 */
 	public void weightFlow(){
+		
 		int userInput;
 		int batchInput;
+		
 		try {		
+		
 			while(true) {
+				
 				// 1 - Vægten beder om, at der indtastes operatørnummer
 				// 2 - Operatøren indtaster sit brugernummer (område 11-99)
 				while (true) {
+					
 					userInput = w.getInputWithMsg("Indtast operatørnummer");
 					System.out.println(userInput);
+					
 					// 3 - Operatørens navn findes i databasen og vises på vægten
 					w.showLongMsg("Navn: " + d.userInDatabase(userInput).getName());
 
 					// 4 - Operatøren kvitterer for at navnet er korrekt
 					TimeUnit.SECONDS.sleep(2);
 					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
+					
 					if (ok == 0) {
 						break;
 					}
@@ -39,6 +48,7 @@ public class Functionality {
 				// 5 - Vægten beder om, at der indtastes batch nummer (område 1000-9999)
 				// 6 - Operatør indtaster batch nummer
 				while(true) {
+					
 					batchInput = w.getInputWithMsg("Indtast batch nummer.");
 					d.batchInDatabase(batchInput);
 
@@ -50,6 +60,7 @@ public class Functionality {
 					// 8 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
 					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
+					
 					if (ok == 0) {
 						break;
 					}
@@ -58,18 +69,21 @@ public class Functionality {
 				// 9 - Vægten tareres
 				// 10 - Operatøren instrueres om, at placere tara (tom beholder)  på vægten
 				while (true) {
+					
 					w.showLongMsg("Placer en tom beholder på vægten");
 					w.setTaraWeight();
 
 					// 11 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
 					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
+					
 					if (ok == 0) {
 						break;
 					}
 				}
 
 				while(true) {
+					
 					// 12 - Tara’s vægt registreres
 					d.batchInDatabase(batchInput).addTaraWeight(w.getWeight());
 
@@ -82,12 +96,14 @@ public class Functionality {
 					// 15 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(5);
 					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
+					
 					if (ok == 0) {
 						break;
 					}
 				}
 
 				while(true) {
+					
 					// 16 - Nettovægt registreres
 					d.batchInDatabase(batchInput).addNettoWeight(2); //Den givne kg på vægten?
 
@@ -100,12 +116,14 @@ public class Functionality {
 					// 19 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
 					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
+					
 					if (ok == 0) {
 						break;
 					}
 				}
 
 				while(true) {
+					
 					// 20 - Bruttovægt registreres (negativ)
 					d.batchInDatabase(batchInput).addNettoWeight(d.batchInDatabase(2).getBruttoWeight()*-1);
 
@@ -115,6 +133,7 @@ public class Functionality {
 					// 22 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
 					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
+					
 					if (ok == 0) {
 						break;
 					}
@@ -127,6 +146,7 @@ public class Functionality {
 			}
 
 		} catch (WeightException | InterruptedException e) {
+			
 			System.out.println(e);
 		}
 	}

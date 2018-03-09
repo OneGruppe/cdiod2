@@ -21,12 +21,24 @@ public class Weight_Translate {
     public Weight_Translate() {
 
         try {
-            // initialize the socket with the local IP-addr and right port
-            // Virtuel vægt
+        	
+            // initialize the socket with the right IP-addr and port
+        	
+            /*
+             	   ***********
+             ***** Virtuel vægt *****
+                   ***********
+             */
             socket = new Socket("127.0.0.1", 8000);
 
-            // Den fysiske vægt(2)
+            
+            /*
+                   ******************
+             ***** Den fysiske vægt(2) *****
+                   ******************
+             */
             // socket = new Socket("169.254.2.3", 8000);
+    
 
             // initialize the writer and the reader with the socket output and input stream
             write = new PrintWriter(socket.getOutputStream(), true);
@@ -34,6 +46,7 @@ public class Weight_Translate {
 
             // catch of exceptions
         } catch (IOException e) {
+        	
             e.printStackTrace();
             return;
         }
@@ -48,8 +61,11 @@ public class Weight_Translate {
      * @throws IOException
      */
     public void showMsg(String message) throws WeightException {
+    	
         try {
+        	
             System.out.println("Running function showMsg with message: " + message);
+            
             // write commands to the weight (open telnet)
             write.println("D "+ "\"" + message + "\"");
 
@@ -80,12 +96,14 @@ public class Weight_Translate {
         System.out.println(message + " successfully displayed");
 
         try {
+        	
             System.out.println("Tries to readLine()");
             System.out.println(read.readLine());
             System.out.println("ReadLine successful");
         }
         catch (IOException e) {
-            throw new WeightException("Error showing long message");
+         
+        	throw new WeightException("Error showing long message");
         }
 
     }
@@ -96,6 +114,7 @@ public class Weight_Translate {
     public void removeMsg() throws WeightException {
 
         try {
+        	
             System.out.println("Running function removeMsg");
             // Write commends to the weight (open telnet)
             write.println("DW");
@@ -116,7 +135,9 @@ public class Weight_Translate {
      * Skriver en besked til UI, og får en int tilbage fra vægt.
      */
     public int getInputWithMsg(String message) throws WeightException {
+    	
         try {
+        	
             System.out.println("Running function getInputWithMsg with message: " + message);
             //Sends message to weight with a given message
             write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
@@ -133,9 +154,11 @@ public class Weight_Translate {
             String InputString = response.substring(8, (response.length() - 1));
             System.out.println("Cuts " + response + " into " + InputString);
             System.out.println(InputString);
+           
             if(InputString.equals("")) {
                 return 0;
             }
+            
             int resultInt = Integer.parseInt(InputString);
 
             System.out.println("getInputWithMsg successfully run");
@@ -154,6 +177,7 @@ public class Weight_Translate {
      * @throws IOException
      */
     public double getWeight() throws WeightException {
+    	
         try {
             // S command retrieves weight
             System.out.println("Running function getWeight()");

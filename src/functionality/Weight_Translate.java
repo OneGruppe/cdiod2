@@ -214,8 +214,15 @@ public class Weight_Translate {
 			return weight;
 
 		} catch (IOException e) {
-
 			throw new WeightException("Error showing Tara weight");
+		}
+	}
+	
+	public String waitForMessage() throws WeightException {
+		try {
+			 return read.readLine();
+		} catch (IOException e) {
+			throw new WeightException("Error trying to get message");
 		}
 	}
 
@@ -232,4 +239,5 @@ public class Weight_Translate {
 			throw new WeightException("Could not close connection");
 		}
 	}
+	
 }

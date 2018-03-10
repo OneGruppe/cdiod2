@@ -4,12 +4,12 @@ import java.util.concurrent.TimeUnit;
 import data.*;
 
 public class Functionality_Virtual implements IFunctionality {
-	
+
 	private ObjectTransfer d;
 	private Weight_Translate w;
 
 	public Functionality_Virtual(String ip, int port) {
-		
+
 		d = new ObjectTransfer();
 		w = new Weight_Translate(ip, port);
 	}
@@ -18,29 +18,29 @@ public class Functionality_Virtual implements IFunctionality {
 	 * Kører flow for vægten.
 	 */
 	public void weightFlow(){
-		
 		int userInput;
 		int batchInput;
-		
+
 		try {		
-		
+
 			while(true) {
-				
+
 				// 1 - Vægten beder om, at der indtastes operatørnummer
 				// 2 - Operatøren indtaster sit brugernummer (område 11-99)
 				while (true) {
-					
+					w.removeMsg();
 					userInput = w.getInputWithMsg("Indtast operatørnummer");
 					System.out.println(userInput);
-					
+					w.removeMsg();
 					// 3 - Operatørens navn findes i databasen og vises på vægten
-					w.showLongMsg("Navn: " + d.userInDatabase(userInput).getName());
+					w.showLongMsg("Valgt bruger: " + d.userInDatabase(userInput).getName());
 
 					// 4 - Operatøren kvitterer for at navnet er korrekt
-					TimeUnit.SECONDS.sleep(2);
-					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
-					
-					if (ok == 0) {
+					TimeUnit.SECONDS.sleep(3);
+					w.removeMsg();
+					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					w.removeMsg();
+					if (ok == 1) {
 						break;
 					}
 				}
@@ -48,20 +48,30 @@ public class Functionality_Virtual implements IFunctionality {
 				// 5 - Vægten beder om, at der indtastes batch nummer (område 1000-9999)
 				// 6 - Operatør indtaster batch nummer
 				while(true) {
-					
+
 					batchInput = w.getInputWithMsg("Indtast batch nummer.");
 					d.batchInDatabase(batchInput);
+					w.removeMsg();
 
-					// 7 - Operatøren instrueres om, at vægten skal være ubelastet
-					w.showLongMsg("Batch :" + d.batchInDatabase(batchInput).getDesc());
-					TimeUnit.SECONDS.sleep(2);
-					w.showLongMsg("Fjern alt last fra vægten.");
+					w.showLongMsg("Valgt batch: " + d.batchInDatabase(batchInput).getDesc());
 
 					// 8 - Operatøren kvitterer
-					TimeUnit.SECONDS.sleep(2);
-					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
-					
+					TimeUnit.SECONDS.sleep(3);
+					w.removeMsg();
+					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					w.removeMsg();
 					if (ok == 0) {
+						break;
+					}
+				}
+				while(true) {
+					// 7 - Operatøren instrueres om, at vægten skal være ubelastet
+					w.showLongMsg("Fjern alt last fra vægten.");
+					TimeUnit.SECONDS.sleep(2);
+					w.removeMsg();
+					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					w.removeMsg();
+					if (ok == 1) {
 						break;
 					}
 				}
@@ -69,21 +79,23 @@ public class Functionality_Virtual implements IFunctionality {
 				// 9 - Vægten tareres
 				// 10 - Operatøren instrueres om, at placere tara (tom beholder)  på vægten
 				while (true) {
-					
+
 					w.showLongMsg("Placer en tom beholder på vægten");
 					w.setTaraWeight();
 
 					// 11 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
-					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
-					
-					if (ok == 0) {
+					w.removeMsg();
+					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					w.removeMsg();
+
+					if (ok == 1) {
 						break;
 					}
 				}
 
 				while(true) {
-					
+
 					// 12 - Tara’s vægt registreres
 					d.batchInDatabase(batchInput).addTaraWeight(w.getWeight());
 
@@ -95,15 +107,16 @@ public class Functionality_Virtual implements IFunctionality {
 
 					// 15 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(5);
-					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
-					
-					if (ok == 0) {
+					w.removeMsg();
+					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					w.removeMsg();
+					if (ok == 1) {
 						break;
 					}
 				}
 
 				while(true) {
-					
+
 					// 16 - Nettovægt registreres
 					d.batchInDatabase(batchInput).addNettoWeight(2); //Den givne kg på vægten?
 
@@ -115,15 +128,16 @@ public class Functionality_Virtual implements IFunctionality {
 
 					// 19 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
-					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
-					
-					if (ok == 0) {
+					w.removeMsg();
+					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					w.removeMsg();
+					if (ok == 1) {
 						break;
 					}
 				}
 
 				while(true) {
-					
+
 					// 20 - Bruttovægt registreres (negativ)
 					d.batchInDatabase(batchInput).addNettoWeight(d.batchInDatabase(2).getBruttoWeight()*-1);
 
@@ -132,9 +146,10 @@ public class Functionality_Virtual implements IFunctionality {
 
 					// 22 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
-					int ok = w.getInputWithMsg("Tryk ok, for at bekræfte.");
-					
-					if (ok == 0) {
+					w.removeMsg();
+					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					w.removeMsg();
+					if (ok == 1) {
 						break;
 					}
 				}
@@ -142,11 +157,17 @@ public class Functionality_Virtual implements IFunctionality {
 				// 23 - Vægten tareres
 				w.setTaraWeight();
 
-				w.showLongMsg("This batch-process is done. \n Press '1' to close program, anything else to start over.");
+				w.showLongMsg("Process fuldført \n tast '1' + ok for at lukke program, eller andet for at starte om.");
+				TimeUnit.SECONDS.sleep(2);
+				int ok = w.getInputWithMsg("tast '1' for sluk");
+				w.removeMsg();
+				if (ok == 1) {
+					break;
+				}
 			}
 
 		} catch (WeightException | InterruptedException e) {
-			
+
 			System.out.println(e);
 		}
 	}

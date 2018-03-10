@@ -110,7 +110,9 @@ public class Weight_Translate {
 	 * Skriver en besked til UI, og får en int tilbage fra vægt.
 	 */
 	public int getInputWithMsg(String message) throws WeightException {
+		
 		try {
+			
 			System.out.println("Running function getInputWithMsg with message: " + message);
 			//Sends message to weight with a given message
 			write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
@@ -137,6 +139,7 @@ public class Weight_Translate {
 			return resultInt;
 
 		} catch(IOException e) {
+			
 			throw new WeightException("Error getting the input");
 		}
 	}
@@ -148,6 +151,7 @@ public class Weight_Translate {
 	 * @throws IOException
 	 */
 	public double getWeight() throws WeightException {
+		
 		try {
 			// S command retrieves weight
 			System.out.println("Running function getWeight()");
@@ -181,6 +185,7 @@ public class Weight_Translate {
 	 * @throws IOException
 	 */
 	public double setTaraWeight() throws WeightException {
+		
 		try {
 			System.out.println("Running function setTaraWeight()");
 			// T command retrieves weight
@@ -206,25 +211,33 @@ public class Weight_Translate {
 	}
 	
 	public String waitForMessage() throws WeightException {
+		
 		try {
+			
 			System.out.println("Running function waitForMessage()");
 			System.out.println("Reading line");
 			String msgread = read.readLine();
 			System.out.println("' " + msgread + " ' was read from the weight");
 			 return msgread;
+			 
 		} catch (IOException e) {
+			
 			throw new WeightException("Error trying to get message");
 		}
 	}
 
 	public void closeAllLeaks() throws WeightException {
+		
 		try {
+			
 			System.out.println("closes all leaks");
 			socket.close();
 			write.close();
 			read.close();
 			System.out.println("All leaks successfully closed \n \n");
+			
 		} catch (IOException e) {
+			
 			throw new WeightException("Could not close connection");
 		}
 	}

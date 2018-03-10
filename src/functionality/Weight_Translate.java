@@ -30,7 +30,6 @@ public class Weight_Translate {
 			e.printStackTrace();
 			return;
 		}
-
 	}
 
 	/**
@@ -57,7 +56,6 @@ public class Weight_Translate {
 			System.out.println("ReadLine successful \n \n");
 
 		} catch (IOException e) {
-
 			throw new WeightException("Error showing message");
 		}
 	}
@@ -84,16 +82,13 @@ public class Weight_Translate {
 
 			throw new WeightException("Error showing long message");
 		}
-
 	}
 
 	/**
 	 * Fjerner beskeden fra display
 	 */
 	public void removeMsg() throws WeightException {
-
 		try {
-
 			System.out.println("Running function removeMsg");
 			// Write commends to the weight (open telnet)
 			write.println("DW");
@@ -105,7 +100,6 @@ public class Weight_Translate {
 			System.out.println("ReadLine() successful \n \n");
 
 		} catch (IOException e) {
-
 			throw new WeightException("Error deleting message");
 		}
 	}
@@ -114,9 +108,7 @@ public class Weight_Translate {
 	 * Skriver en besked til UI, og får en int tilbage fra vægt.
 	 */
 	public int getInputWithMsg(String message) throws WeightException {
-
 		try {
-
 			System.out.println("Running function getInputWithMsg with message: " + message);
 			//Sends message to weight with a given message
 			write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
@@ -139,12 +131,10 @@ public class Weight_Translate {
 			}
 
 			int resultInt = Integer.parseInt(InputString);
-
 			System.out.println("getInputWithMsg successfully run  \n \n");
 			return resultInt;
 
 		} catch(IOException e) {
-
 			throw new WeightException("Error getting the input");
 		}
 	}
@@ -156,7 +146,6 @@ public class Weight_Translate {
 	 * @throws IOException
 	 */
 	public double getWeight() throws WeightException {
-
 		try {
 			// S command retrieves weight
 			System.out.println("Running function getWeight()");
@@ -176,11 +165,9 @@ public class Weight_Translate {
 			System.out.println("Converts " + weightString + " into double");
 			double weight = Double.parseDouble(weightString);
 			System.out.println("Convertion successful" + weightString + " is now double " + weight + "\n \n");
-
 			return weight;
 
 		} catch(IOException e) {
-
 			throw new WeightException("Error showing weight");
 		}
 	}
@@ -192,7 +179,6 @@ public class Weight_Translate {
 	 * @throws IOException
 	 */
 	public double setTaraWeight() throws WeightException {
-
 		try {
 			System.out.println("Running function setTaraWeight()");
 			// T command retrieves weight
@@ -210,9 +196,8 @@ public class Weight_Translate {
 			// convert from string to double.
 			double weight = Double.parseDouble(weightString);
 			System.out.println("Converts " + weight + " into double " + weight + "\n \n");
-
 			return weight;
-
+			
 		} catch (IOException e) {
 			throw new WeightException("Error showing Tara weight");
 		}
@@ -231,7 +216,6 @@ public class Weight_Translate {
 	}
 
 	public void closeAllLeaks() throws WeightException {
-
 		try {
 			System.out.println("closes all leaks");
 			socket.close();
@@ -239,7 +223,6 @@ public class Weight_Translate {
 			read.close();
 			System.out.println("All leaks successfully closed \n \n");
 		} catch (IOException e) {
-
 			throw new WeightException("Could not close connection");
 		}
 	}

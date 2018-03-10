@@ -8,10 +8,10 @@ public class Functionality_Virtual implements IFunctionality {
 	private ObjectTransfer d;
 	private Weight_Translate w;
 
-	public Functionality_Virtual(String ip, int port) {
+	public Functionality_Virtual(String ip) {
 
 		d = new ObjectTransfer();
-		w = new Weight_Translate(ip, port);
+		w = new Weight_Translate(ip);
 	}
 
 	/**

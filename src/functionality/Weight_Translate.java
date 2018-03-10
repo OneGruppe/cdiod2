@@ -13,12 +13,14 @@ public class Weight_Translate {
 	private Socket socket;
 	private PrintWriter write;
 	private BufferedReader read;
+	
+	private final int WEIGHT_PORT = 8000; 
 
-	public Weight_Translate(String ip, int port) {
+	public Weight_Translate(String ip) {
 
 		try {
 			// create socket connection with ip and port, delivered from Main
-			socket = new Socket(ip, port);
+			socket = new Socket(ip, WEIGHT_PORT);
 
 			// initialize the writer and the reader with the socket output and input stream
 			write = new PrintWriter(socket.getOutputStream(), true);

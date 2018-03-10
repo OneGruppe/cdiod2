@@ -5,12 +5,12 @@ import data.*;
 
 public class Functionality_Psysical implements IFunctionality {
 	
-	private ObjectTransfer d;
+	private DatabaseTransfer d;
 	private Weight_Translate w;
 
 	public Functionality_Psysical(String ip) {
 		
-		d = new ObjectTransfer();
+		d = new DatabaseTransfer();
 		w = new Weight_Translate(ip);
 	}
 

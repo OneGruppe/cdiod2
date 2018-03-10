@@ -2,13 +2,13 @@ package data;
 
 import java.util.ArrayList;
 
-public class ObjectTransfer {
+public class DatabaseTransfer {
 	
 	private Database d;
 	private ArrayList<User> userlist;
 	private ArrayList<Batch> batchlist;
 
-	public ObjectTransfer(){
+	public DatabaseTransfer(){
 	
 		// Opret ny instans a datalag (i stedet for database)
 		d = new Database();
@@ -20,7 +20,7 @@ public class ObjectTransfer {
 
 		//Batch
 		batchlist = new ArrayList<Batch>();
-		Batch batch1 = new Batch(d.getBatchid(), d.getBatchdesc(), 0.0, 0.0, 0.0);
+		Batch batch1 = new Batch(d.getBatchid(), d.getBatchdesc(), 0.0);
 		batchlist.add(batch1);
 	
 	}

@@ -54,7 +54,7 @@ public class Weight_Translate {
 			// read the response of the weight
 			System.out.println(read.readLine());
 
-			System.out.println("ReadLine successful");
+			System.out.println("ReadLine successful \n \n");
 
 		} catch (IOException e) {
 
@@ -78,7 +78,7 @@ public class Weight_Translate {
 
 			System.out.println("Tries to readLine()");
 			System.out.println(read.readLine());
-			System.out.println("ReadLine successful");
+			System.out.println("ReadLine successful \n \n");
 		}
 		catch (IOException e) {
 
@@ -102,7 +102,7 @@ public class Weight_Translate {
 			System.out.println("Tries to readLine()");
 			// Read the response from he weight
 			System.out.println(read.readLine());
-			System.out.println("ReadLine() successful");
+			System.out.println("ReadLine() successful \n \n");
 
 		} catch (IOException e) {
 
@@ -140,7 +140,7 @@ public class Weight_Translate {
 
 			int resultInt = Integer.parseInt(InputString);
 
-			System.out.println("getInputWithMsg successfully run");
+			System.out.println("getInputWithMsg successfully run  \n \n");
 			return resultInt;
 
 		} catch(IOException e) {
@@ -175,7 +175,7 @@ public class Weight_Translate {
 			// convert from string to double.
 			System.out.println("Converts " + weightString + " into double");
 			double weight = Double.parseDouble(weightString);
-			System.out.println("Convertion successful" + weightString + " is now double " + weight);
+			System.out.println("Convertion successful" + weightString + " is now double " + weight + "\n \n");
 
 			return weight;
 
@@ -209,7 +209,7 @@ public class Weight_Translate {
 
 			// convert from string to double.
 			double weight = Double.parseDouble(weightString);
-			System.out.println("Converts " + weight + " into double " + weight);
+			System.out.println("Converts " + weight + " into double " + weight + "\n \n");
 
 			return weight;
 
@@ -220,7 +220,11 @@ public class Weight_Translate {
 	
 	public String waitForMessage() throws WeightException {
 		try {
-			 return read.readLine();
+			System.out.println("Running function waitForMessage()");
+			System.out.println("Reading line");
+			String msgread = read.readLine();
+			System.out.println("' " + msgread + " ' was read from the weight");
+			 return msgread;
 		} catch (IOException e) {
 			throw new WeightException("Error trying to get message");
 		}
@@ -233,7 +237,7 @@ public class Weight_Translate {
 			socket.close();
 			write.close();
 			read.close();
-			System.out.println("All leaks successfully closed");
+			System.out.println("All leaks successfully closed \n \n");
 		} catch (IOException e) {
 
 			throw new WeightException("Could not close connection");

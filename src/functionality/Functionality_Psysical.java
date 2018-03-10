@@ -3,12 +3,12 @@ import java.util.concurrent.TimeUnit;
 
 import data.*;
 
-public class Functionality {
+public class Functionality_Psysical implements IFunctionality {
 	
 	private ObjectTransfer d;
 	private Weight_Translate w;
 
-	public Functionality() {
+	public Functionality_Psysical() {
 		
 		d = new ObjectTransfer();
 		w = new Weight_Translate();

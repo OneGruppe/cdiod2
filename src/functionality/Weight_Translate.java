@@ -81,7 +81,6 @@ public class Weight_Translate {
 			System.out.println("ReadLine successful \n \n");
 		}
 		catch (IOException e) {
-
 			throw new WeightException("Error showing long message");
 		}
 	}
@@ -90,6 +89,7 @@ public class Weight_Translate {
 	 * Fjerner beskeden fra display
 	 */
 	public void removeMsg() throws WeightException {
+		
 		try {
 			System.out.println("Running function removeMsg");
 			// Write commends to the weight (open telnet)
@@ -139,7 +139,6 @@ public class Weight_Translate {
 			return resultInt;
 
 		} catch(IOException e) {
-			
 			throw new WeightException("Error getting the input");
 		}
 	}
@@ -221,7 +220,6 @@ public class Weight_Translate {
 			 return msgread;
 			 
 		} catch (IOException e) {
-			
 			throw new WeightException("Error trying to get message");
 		}
 	}
@@ -237,7 +235,6 @@ public class Weight_Translate {
 			System.out.println("All leaks successfully closed \n \n");
 			
 		} catch (IOException e) {
-			
 			throw new WeightException("Could not close connection");
 		}
 	}

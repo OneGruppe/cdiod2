@@ -48,7 +48,6 @@ public class Functionality_Virtual implements IFunctionality {
 				// 5 - Vægten beder om, at der indtastes batch nummer (område 1000-9999)
 				// 6 - Operatør indtaster batch nummer
 				while(true) {
-
 					batchInput = w.getInputWithMsg("Indtast batch nummer.");
 					d.batchInDatabase(batchInput);
 					w.removeMsg();
@@ -60,7 +59,7 @@ public class Functionality_Virtual implements IFunctionality {
 					w.removeMsg();
 					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
 					w.removeMsg();
-					if (ok == 0) {
+					if (ok == 1) {
 						break;
 					}
 				}
@@ -69,7 +68,7 @@ public class Functionality_Virtual implements IFunctionality {
 					w.showLongMsg("Fjern alt last fra vægten.");
 					TimeUnit.SECONDS.sleep(2);
 					w.removeMsg();
-					int ok = w.getInputWithMsg("Tast 1, hvis korrekt");
+					int ok = w.getInputWithMsg("Tast 1, hvis fjernet");
 					w.removeMsg();
 					if (ok == 1) {
 						break;

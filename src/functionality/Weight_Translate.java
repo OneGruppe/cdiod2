@@ -8,249 +8,228 @@ import java.net.Socket;
 
 public class Weight_Translate {
 
-    // declare socket to open connection to TCP/Telnet
-    // declare Writer and reader for I/O
-    private Socket socket;
-    private PrintWriter write;
-    private BufferedReader read;
+	// declare socket to open connection to TCP/Telnet
+	// declare Writer and reader for I/O
+	private Socket socket;
+	private PrintWriter write;
+	private BufferedReader read;
 
-    // ******************************************
-    // Denne klasse har direkte adgang til vægten
-    // ******************************************
+	public Weight_Translate(String ip, int port) {
 
-    public Weight_Translate() {
+		try {
+			// create socket connection with ip and port, delivered from Main
+			socket = new Socket(ip, port);
 
-        try {
-        	
-            // initialize the socket with the right IP-addr and port
-        	
-            /*
-             	   ***********
-             ***** Virtuel vægt *****
-                   ***********
-             */
-            socket = new Socket("127.0.0.1", 8000);
+			// initialize the writer and the reader with the socket output and input stream
+			write = new PrintWriter(socket.getOutputStream(), true);
+			read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            
-            /*
-                   ******************
-             ***** Den fysiske vægt(2) *****
-                   ******************
-             */
-            // socket = new Socket("169.254.2.3", 8000);
-    
+			// catch of exceptions
+		} catch (IOException e) {
 
-            // initialize the writer and the reader with the socket output and input stream
-            write = new PrintWriter(socket.getOutputStream(), true);
-            read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			e.printStackTrace();
+			return;
+		}
 
-            // catch of exceptions
-        } catch (IOException e) {
-        	
-            e.printStackTrace();
-            return;
-        }
+	}
 
-    }
+	/**
+	 * Viser en besked på display
+	 *
+	 * @param message Den besked der vises på UI.
+	 * @throws IOException
+	 */
+	public void showMsg(String message) throws WeightException {
 
-    /**
-     * Viser en besked på display
-     *
-     * @param message
-     *            Den besked der vises på UI.
-     * @throws IOException
-     */
-    public void showMsg(String message) throws WeightException {
-    	
-        try {
-        	
-            System.out.println("Running function showMsg with message: " + message);
-            
-            // write commands to the weight (open telnet)
-            write.println("D "+ "\"" + message + "\"");
+		try {
 
-            System.out.println(message + " successfully displayed");
+			System.out.println("Running function showMsg with message: " + message);
 
-            System.out.println("Tries to readLine()");
-            // read the response of the weight
-            System.out.println(read.readLine());
+			// write commands to the weight (open telnet)
+			write.println("D "+ "\"" + message + "\"");
 
-            System.out.println("ReadLine successful");
+			System.out.println(message + " successfully displayed");
 
-        } catch (IOException e) {
+			System.out.println("Tries to readLine()");
+			// read the response of the weight
+			System.out.println(read.readLine());
 
-            throw new WeightException("Error showing message");
-        }
-    }
+			System.out.println("ReadLine successful");
 
-    /**
-     * Viser en lang besked på display
-     *
-     * @param message
-     *            Den besked der vises på UI.
-     */
-    public void showLongMsg(String message) throws WeightException {
+		} catch (IOException e) {
 
-        System.out.println("Running function showLongMsg with message: " + message);
-        write.println("P111 " + "\"" + message + "\"");
-        System.out.println(message + " successfully displayed");
+			throw new WeightException("Error showing message");
+		}
+	}
 
-        try {
-        	
-            System.out.println("Tries to readLine()");
-            System.out.println(read.readLine());
-            System.out.println("ReadLine successful");
-        }
-        catch (IOException e) {
-         
-        	throw new WeightException("Error showing long message");
-        }
+	/**
+	 * Viser en lang besked på display
+	 *
+	 * @param message
+	 *            Den besked der vises på UI.
+	 */
+	public void showLongMsg(String message) throws WeightException {
 
-    }
+		System.out.println("Running function showLongMsg with message: " + message);
+		write.println("P111 " + "\"" + message + "\"");
+		System.out.println(message + " successfully displayed");
 
-    /**
-     * Fjerner beskeden fra display
-     */
-    public void removeMsg() throws WeightException {
+		try {
 
-        try {
-        	
-            System.out.println("Running function removeMsg");
-            // Write commends to the weight (open telnet)
-            write.println("DW");
-            System.out.println("RemoveMsg successful");
+			System.out.println("Tries to readLine()");
+			System.out.println(read.readLine());
+			System.out.println("ReadLine successful");
+		}
+		catch (IOException e) {
 
-            System.out.println("Tries to readLine()");
-            // Read the response from he weight
-            System.out.println(read.readLine());
-            System.out.println("ReadLine() successful");
+			throw new WeightException("Error showing long message");
+		}
 
-        } catch (IOException e) {
+	}
 
-            throw new WeightException("Error deleting message");
-        }
-    }
+	/**
+	 * Fjerner beskeden fra display
+	 */
+	public void removeMsg() throws WeightException {
 
-    /**
-     * Skriver en besked til UI, og får en int tilbage fra vægt.
-     */
-    public int getInputWithMsg(String message) throws WeightException {
-    	
-        try {
-        	
-            System.out.println("Running function getInputWithMsg with message: " + message);
-            //Sends message to weight with a given message
-            write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
-            System.out.println(message + " successfully displayed");
+		try {
 
-            System.out.println("Tries to readLine(), reading response from user");
-            //Reads the input the user response with
-            System.out.println(read.readLine());
+			System.out.println("Running function removeMsg");
+			// Write commends to the weight (open telnet)
+			write.println("DW");
+			System.out.println("RemoveMsg successful");
 
-            String response = read.readLine();
-            System.out.println(response + " successfully read and saved into string response");
+			System.out.println("Tries to readLine()");
+			// Read the response from he weight
+			System.out.println(read.readLine());
+			System.out.println("ReadLine() successful");
 
-            // creates a string that only consists of the numbers in response
-            String InputString = response.substring(8, (response.length() - 1));
-            System.out.println("Cuts " + response + " into " + InputString);
-            System.out.println(InputString);
-           
-            if(InputString.equals("")) {
-                return 0;
-            }
-            
-            int resultInt = Integer.parseInt(InputString);
+		} catch (IOException e) {
 
-            System.out.println("getInputWithMsg successfully run");
-            return resultInt;
+			throw new WeightException("Error deleting message");
+		}
+	}
 
-        } catch(IOException e) {
+	/**
+	 * Skriver en besked til UI, og får en int tilbage fra vægt.
+	 */
+	public int getInputWithMsg(String message) throws WeightException {
 
-            throw new WeightException("Error getting the input");
-        }
-    }
+		try {
 
-    /**
-     * Trækker information om nuværende vægt-info
-     *
-     * @return vægt i double
-     * @throws IOException
-     */
-    public double getWeight() throws WeightException {
-    	
-        try {
-            // S command retrieves weight
-            System.out.println("Running function getWeight()");
-            write.println("S");
-            System.out.println("getWeight successfully run");
+			System.out.println("Running function getInputWithMsg with message: " + message);
+			//Sends message to weight with a given message
+			write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
+			System.out.println(message + " successfully displayed");
 
-            System.out.println("awaits response");
-            String response = read.readLine();
-            System.out.println(response + " successfully stored into response string");
+			System.out.println("Tries to readLine(), reading response from user");
+			//Reads the input the user response with
+			System.out.println(read.readLine());
 
-            // extracts only the numbers from response to a string
-            System.out.println("Cuts the response into useful string");
-            String weightString = response.substring(9, (response.length() - 2));
-            System.out.println("String successfully cut into: " + weightString);
+			String response = read.readLine();
+			System.out.println(response + " successfully read and saved into string response");
 
-            // convert from string to double.
-            System.out.println("Converts " + weightString + " into double");
-            double weight = Double.parseDouble(weightString);
-            System.out.println("Convertion successful" + weightString + " is now double " + weight);
+			// creates a string that only consists of the numbers in response
+			String InputString = response.substring(8, (response.length() - 1));
+			System.out.println("Cuts " + response + " into " + InputString);
+			System.out.println(InputString);
 
-            return weight;
+			if(InputString.equals("")) {
+				return 0;
+			}
 
-        } catch(IOException e) {
+			int resultInt = Integer.parseInt(InputString);
 
-            throw new WeightException("Error showing weight");
-        }
-    }
+			System.out.println("getInputWithMsg successfully run");
+			return resultInt;
 
-    /**
-     * Trækker information om nuværende Tara-vægt
-     *
-     * @return Tara vægt i double
-     * @throws IOException
-     */
-    public double setTaraWeight() throws WeightException {
+		} catch(IOException e) {
 
-        try {
-            System.out.println("Running function setTaraWeight()");
-            // T command retrieves weight
-            write.println("T");
-            System.out.println("function setTaraWeight successfully run");
+			throw new WeightException("Error getting the input");
+		}
+	}
 
-            System.out.println("Awaits response");
-            String response = read.readLine();
-            System.out.println("response accepted into string: " + response);
+	/**
+	 * Trækker information om nuværende vægt-info
+	 *
+	 * @return vægt i double
+	 * @throws IOException
+	 */
+	public double getWeight() throws WeightException {
 
-            // extracts only the numbers from response to a string
-            String weightString = response.substring(9, (response.length() - 2));
-            System.out.println("cuts " + response + " into string " + weightString);
+		try {
+			// S command retrieves weight
+			System.out.println("Running function getWeight()");
+			write.println("S");
+			System.out.println("getWeight successfully run");
 
-            // convert from string to double.
-            double weight = Double.parseDouble(weightString);
-            System.out.println("Converts " + weight + " into double " + weight);
+			System.out.println("awaits response");
+			String response = read.readLine();
+			System.out.println(response + " successfully stored into response string");
 
-            return weight;
+			// extracts only the numbers from response to a string
+			System.out.println("Cuts the response into useful string");
+			String weightString = response.substring(9, (response.length() - 2));
+			System.out.println("String successfully cut into: " + weightString);
 
-        } catch (IOException e) {
+			// convert from string to double.
+			System.out.println("Converts " + weightString + " into double");
+			double weight = Double.parseDouble(weightString);
+			System.out.println("Convertion successful" + weightString + " is now double " + weight);
 
-            throw new WeightException("Error showing Tara weight");
-        }
-    }
+			return weight;
 
-    public void closeAllLeaks() throws WeightException {
+		} catch(IOException e) {
 
-        try {
-            System.out.println("closes all leaks");
-            socket.close();
-            write.close();
-            read.close();
-            System.out.println("All leaks successfully closed");
-        } catch (IOException e) {
+			throw new WeightException("Error showing weight");
+		}
+	}
 
-            throw new WeightException("Could not close connection");
-        }
-    }
+	/**
+	 * Trækker information om nuværende Tara-vægt
+	 *
+	 * @return Tara vægt i double
+	 * @throws IOException
+	 */
+	public double setTaraWeight() throws WeightException {
+
+		try {
+			System.out.println("Running function setTaraWeight()");
+			// T command retrieves weight
+			write.println("T");
+			System.out.println("function setTaraWeight successfully run");
+
+			System.out.println("Awaits response");
+			String response = read.readLine();
+			System.out.println("response accepted into string: " + response);
+
+			// extracts only the numbers from response to a string
+			String weightString = response.substring(9, (response.length() - 2));
+			System.out.println("cuts " + response + " into string " + weightString);
+
+			// convert from string to double.
+			double weight = Double.parseDouble(weightString);
+			System.out.println("Converts " + weight + " into double " + weight);
+
+			return weight;
+
+		} catch (IOException e) {
+
+			throw new WeightException("Error showing Tara weight");
+		}
+	}
+
+	public void closeAllLeaks() throws WeightException {
+
+		try {
+			System.out.println("closes all leaks");
+			socket.close();
+			write.close();
+			read.close();
+			System.out.println("All leaks successfully closed");
+		} catch (IOException e) {
+
+			throw new WeightException("Could not close connection");
+		}
+	}
 }

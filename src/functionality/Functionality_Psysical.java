@@ -8,10 +8,10 @@ public class Functionality_Psysical implements IFunctionality {
 	private ObjectTransfer d;
 	private Weight_Translate w;
 
-	public Functionality_Psysical() {
+	public Functionality_Psysical(String ip, int port) {
 		
 		d = new ObjectTransfer();
-		w = new Weight_Translate();
+		w = new Weight_Translate(ip, port);
 	}
 
 	/**

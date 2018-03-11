@@ -224,14 +224,23 @@ public class Weight_Translate {
 		}
 	}
 	
-	public void shutdownWeight(String q) throws WeightException, IOException{
-		// S command retrieves weight
-		System.out.println("Running function shutdownWeight()");
-		write.println(q);
-		System.out.println(read.readLine());
-		write.println("\n");
-		System.out.println(read.readLine());
-		System.out.println("shutdown ran successfully");
+	public void shutdownWeight(int i) throws WeightException, IOException{
+		if(i == 1) { // Virtual Shutdown
+			System.out.println("Running function shutdownWeight()");
+			write.println("Q ");
+			System.out.println(read.readLine());
+			write.println("\n");
+			System.out.println(read.readLine());
+			System.out.println("shutdown ran successfully");
+		}
+		else if(i == 2) {
+			System.out.println("Running function shutdownWeight()");
+			write.println("PWR 0");
+			System.out.println(read.readLine());
+			write.println("\n");
+			System.out.println(read.readLine());
+			System.out.println("shutdown ran successfully");
+		}
 	}
 	
 	public void setVirtualWeight(double wantedWeight) throws WeightException{

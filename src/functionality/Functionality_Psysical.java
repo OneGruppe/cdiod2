@@ -186,7 +186,7 @@ public class Functionality_Psysical implements IFunctionality {
 				int ok = w.getInputWithMsg("'1'=sluk,'2'=forfra");
 				if (ok == 1) {
 					w.closeAllLeaks();
-					w.shutdownWeight("PWR 0");
+					w.shutdownWeight(2);
 				}
 				w.removeMsg();
 			}

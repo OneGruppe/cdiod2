@@ -191,7 +191,7 @@ public class Functionality_Virtual implements IFunctionality {
 				int ok = w.getInputWithMsg("'1'=sluk,'2'=forfra");
 				if (ok == 1) {
 					w.closeAllLeaks();
-					w.shutdownWeight("Q");
+					w.shutdownWeight(1);
 				}
 				w.removeMsg();
 			}

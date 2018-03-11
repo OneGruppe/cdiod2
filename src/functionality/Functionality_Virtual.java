@@ -190,8 +190,9 @@ public class Functionality_Virtual implements IFunctionality {
 				TimeUnit.SECONDS.sleep(4);
 				int ok = w.getInputWithMsg("'1'=sluk,'2'=forfra");
 				if (ok == 1) {
-					w.closeAllLeaks();
 					w.shutdownWeight(1);
+					w.closeAllLeaks();
+					System.exit(0);
 				}
 				w.removeMsg();
 			}

@@ -185,8 +185,9 @@ public class Functionality_Psysical implements IFunctionality {
 				TimeUnit.SECONDS.sleep(4);
 				int ok = w.getInputWithMsg("'1'=sluk,'2'=forfra");
 				if (ok == 1) {
-					w.closeAllLeaks();
 					w.shutdownWeight(2);
+					w.closeAllLeaks();
+					System.exit(0);
 				}
 				w.removeMsg();
 			}

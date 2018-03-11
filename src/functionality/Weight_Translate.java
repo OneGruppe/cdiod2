@@ -13,7 +13,7 @@ public class Weight_Translate {
 	private Socket socket;
 	private PrintWriter write;
 	private BufferedReader read;
-	
+
 	private final int WEIGHT_PORT = 8000; 
 
 	public Weight_Translate(String ip) {
@@ -43,8 +43,8 @@ public class Weight_Translate {
 	public void showMsg(String message) throws WeightException {
 
 		try {
-
-			System.out.println("Running function showMsg with message: " + message);
+			System.out.println("\n*********************************************************");
+			System.out.println("Running function showMsg(" + message + ")");
 
 			// write commands to the weight (open telnet)
 			write.println("D "+ "\"" + message + "\"");
@@ -55,9 +55,10 @@ public class Weight_Translate {
 			// read the response of the weight
 			System.out.println(read.readLine());
 
-			System.out.println("ReadLine successful \n \n");
-
+			System.out.println("ReadLine successful");
+			System.out.println("---------------------------------------------------------\n");
 		} catch (IOException e) {
+			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Error showing message");
 		}
 	}
@@ -70,17 +71,18 @@ public class Weight_Translate {
 	 */
 	public void showLongMsg(String message) throws WeightException {
 
-		System.out.println("Running function showLongMsg with message: " + message);
-		write.println("P111 " + "\"" + message + "\"");
-		System.out.println(message + " successfully displayed");
-
 		try {
-
+			System.out.println("\n*********************************************************");
+			System.out.println("Running function showLongMsg(" + message +")");
+			write.println("P111 " + "\"" + message + "\"");
+			System.out.println(message + " successfully displayed");
 			System.out.println("Tries to readLine()");
 			System.out.println(read.readLine());
-			System.out.println("ReadLine successful \n \n");
+			System.out.println("ReadLine successful");
+			System.out.println("---------------------------------------------------------\n");
 		}
 		catch (IOException e) {
+			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Error showing long message");
 		}
 	}
@@ -89,9 +91,10 @@ public class Weight_Translate {
 	 * Fjerner beskeden fra display
 	 */
 	public void removeMsg() throws WeightException {
-		
+
 		try {
-			System.out.println("Running function removeMsg");
+			System.out.println("\n*********************************************************");
+			System.out.println("Running function removeMsg()");
 			// Write commends to the weight (open telnet)
 			write.println("DW");
 			System.out.println("RemoveMsg successful");
@@ -99,9 +102,10 @@ public class Weight_Translate {
 			System.out.println("Tries to readLine()");
 			// Read the response from he weight
 			System.out.println(read.readLine());
-			System.out.println("ReadLine() successful \n \n");
-
+			System.out.println("ReadLine() successful");
+			System.out.println("---------------------------------------------------------\n");
 		} catch (IOException e) {
+			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Error deleting message");
 		}
 	}
@@ -110,10 +114,10 @@ public class Weight_Translate {
 	 * Skriver en besked til UI, og får en int tilbage fra vægt.
 	 */
 	public int getInputWithMsg(String message) throws WeightException {
-		
+
 		try {
-			
-			System.out.println("Running function getInputWithMsg with message: " + message);
+			System.out.println("\n*********************************************************");
+			System.out.println("Running function getInputWithMsg(" + message + ")");
 			//Sends message to weight with a given message
 			write.println("RM20 8 " + "\"" + message + "\" " + "\" \" " + "\"&3\"");
 			System.out.println(message + " successfully displayed");
@@ -131,14 +135,17 @@ public class Weight_Translate {
 			System.out.println(InputString);
 
 			if(InputString.equals("")) {
+				System.out.println("---------------------------------------------------------\n");
 				return 0;
 			}
 
 			int resultInt = Integer.parseInt(InputString);
-			System.out.println("getInputWithMsg successfully run  \n \n");
+			System.out.println("getInputWithMsg successfully run");
+			System.out.println("---------------------------------------------------------\n");
 			return resultInt;
 
 		} catch(IOException e) {
+			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Error getting the input");
 		}
 	}
@@ -150,9 +157,10 @@ public class Weight_Translate {
 	 * @throws IOException
 	 */
 	public double getWeight() throws WeightException {
-		
+
 		try {
 			// S command retrieves weight
+			System.out.println("\n*********************************************************");
 			System.out.println("Running function getWeight()");
 			write.println("S");
 			System.out.println("getWeight ran successfully");
@@ -169,10 +177,12 @@ public class Weight_Translate {
 			// convert from string to double.
 			System.out.println("Converts " + weightString + " into double");
 			double weight = Double.parseDouble(weightString);
-			System.out.println("Convertion successful" + weightString + " is now double " + weight + "\n \n");
+			System.out.println("Convertion successful" + weightString + " is now double " + weight);
+			System.out.println("---------------------------------------------------------\n");
 			return weight;
 
 		} catch(IOException e) {
+			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Error showing weight");
 		}
 	}
@@ -184,8 +194,9 @@ public class Weight_Translate {
 	 * @throws IOException
 	 */
 	public double setTaraWeight() throws WeightException {
-		
+
 		try {
+			System.out.println("\n*********************************************************");
 			System.out.println("Running function setTaraWeight()");
 			// T command retrieves weight
 			write.println("T");
@@ -201,35 +212,36 @@ public class Weight_Translate {
 
 			// convert from string to double.
 			double weight = Double.parseDouble(weightString);
-			System.out.println("Converts " + weight + " into double " + weight + "\n \n");
+			System.out.println("Converts " + weight + " into double " + weight);
+			System.out.println("---------------------------------------------------------\n");
 			return weight;
-			
+
 		} catch (IOException e) {
+			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Error showing Tara weight");
 		}
 	}
-	
+
 	public String waitForMessage() throws WeightException {
-		
+
 		try {
-			
+			System.out.println("\n*********************************************************");
 			System.out.println("Running function waitForMessage()");
 			System.out.println("Reading line");
 			String msgread = read.readLine();
 			System.out.println("' " + msgread + " ' was read from the weight");
-			 return msgread;
-			 
+			System.out.println("---------------------------------------------------------\n");
+			return msgread;
 		} catch (IOException e) {
 			throw new WeightException("Error trying to get message");
 		}
 	}
-	
+
 	public void shutdownWeight(int i) throws WeightException, IOException{
+		System.out.println("\n*********************************************************");
 		if(i == 1) { // Virtual Shutdown
 			System.out.println("Running function shutdownWeight()");
 			write.println("Q ");
-			System.out.println(read.readLine());
-			write.println("\n");
 			System.out.println(read.readLine());
 			System.out.println("shutdown ran successfully");
 		}
@@ -237,29 +249,33 @@ public class Weight_Translate {
 			System.out.println("Running function shutdownWeight()");
 			write.println("PWR 0");
 			System.out.println(read.readLine());
-			write.println("\n");
-			System.out.println(read.readLine());
 			System.out.println("shutdown ran successfully");
 		}
+		System.out.println("** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** \n");
 	}
-	
+
 	public void setVirtualWeight(double wantedWeight) throws WeightException{
+		System.out.println("\n*********************************************************");
+		System.out.println("Running function setVirtualWeight(" + wantedWeight +")");
 		write.println("B " + wantedWeight);
+		System.out.println("---------------------------------------------------------\n");
 	}
 
 	public void closeAllLeaks() throws WeightException {
-		
+
 		try {
-			
+			System.out.println("\n*********************************************************");
 			System.out.println("closes all leaks");
 			socket.close();
 			write.close();
 			read.close();
-			System.out.println("All leaks successfully closed \n \n");
+			System.out.println("All leaks successfully closed");
+			System.out.println("---------------------------------------------------------\n");
 			
 		} catch (IOException e) {
+			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Could not close connection");
 		}
 	}
-	
+
 }

@@ -6,6 +6,12 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * Weight_Translate class last edited 11.03.2018 - 03.50
+ * @author Group 12
+ *
+ */
+
 public class Weight_Translate {
 
 	// declare socket to open connection to TCP/Telnet
@@ -16,6 +22,10 @@ public class Weight_Translate {
 
 	private final int WEIGHT_PORT = 8000; 
 
+	/**
+	 * Konstruktør tager imod IP og forbinder til den ønskede IP
+	 * @param ip IP'en der skal forbindes til
+	 */
 	public Weight_Translate(String ip) {
 
 		try {
@@ -38,7 +48,7 @@ public class Weight_Translate {
 	 * Viser en besked på display
 	 *
 	 * @param message Den besked der vises på UI.
-	 * @throws IOException
+	 * @throws IOException Hvis der sker en fejl, bruges IOExeption
 	 */
 	public void showMsg(String message) throws WeightException {
 
@@ -66,8 +76,7 @@ public class Weight_Translate {
 	/**
 	 * Viser en lang besked på display
 	 *
-	 * @param message
-	 *            Den besked der vises på UI.
+	 * @param message Den besked der vises på vægten.
 	 */
 	public void showLongMsg(String message) throws WeightException {
 
@@ -111,7 +120,10 @@ public class Weight_Translate {
 	}
 
 	/**
-	 * Skriver en besked til UI, og får en int tilbage fra vægt.
+	 * Skriver en besked til vægten og for et input fra brugeren tilbage.
+	 * @param message Den besked der skal vises til brugeren
+	 * @return ID på det som brugeren har tastet ind
+	 * @throws WeightException Brugerdefineret Exception
 	 */
 	public int getInputWithMsg(String message) throws WeightException {
 
@@ -153,7 +165,7 @@ public class Weight_Translate {
 	/**
 	 * Trækker information om nuværende vægt-info
 	 *
-	 * @return vægt i double
+	 * @return Vægt i double
 	 * @throws IOException
 	 */
 	public double getWeight() throws WeightException {
@@ -222,6 +234,11 @@ public class Weight_Translate {
 		}
 	}
 
+	/**
+	 * Modtager en besked fra brugeren
+	 * @return Den besked der blev indtastet af brugeren
+	 * @throws WeightException
+	 */
 	public String waitForMessage() throws WeightException {
 
 		try {
@@ -237,6 +254,12 @@ public class Weight_Translate {
 		}
 	}
 
+	/**
+	 * Slukker vægten
+	 * @param i 1 for simulatoren, 2 for den fysiske maskine
+	 * @throws WeightException
+	 * @throws IOException
+	 */
 	public void shutdownWeight(int i) throws WeightException, IOException{
 		System.out.println("\n*********************************************************");
 		if(i == 1) { // Virtual Shutdown
@@ -251,9 +274,15 @@ public class Weight_Translate {
 			System.out.println(read.readLine());
 			System.out.println("shutdown ran successfully");
 		}
+		else System.out.println("Fejl i shutdownWeight");
 		System.out.println("** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** \n");
 	}
 
+	/**
+	 * Sætter vægten i simulatoren.
+	 * @param wantedWeight Den ønskede vægt simlatoren skal stå på.
+	 * @throws WeightException
+	 */
 	public void setVirtualWeight(double wantedWeight) throws WeightException{
 		System.out.println("\n*********************************************************");
 		System.out.println("Running function setVirtualWeight(" + wantedWeight +")");
@@ -261,6 +290,10 @@ public class Weight_Translate {
 		System.out.println("---------------------------------------------------------\n");
 	}
 
+	/**
+	 * Lukker alle de objekter vi har åbnet.
+	 * @throws WeightException
+	 */
 	public void closeAllLeaks() throws WeightException {
 
 		try {

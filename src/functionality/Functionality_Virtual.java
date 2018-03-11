@@ -4,25 +4,35 @@ import java.util.concurrent.TimeUnit;
 
 import data.*;
 
+/**
+ * Functionality_Virtual class last edited 11.03.2018 - 03.46
+ * @author Group 12
+ *  
+ */
+
 public class Functionality_Virtual implements IFunctionality {
 
 	private DatabaseTransfer d;
 	private Weight_Translate w;
 
-	public Functionality_Virtual(String ip) {
-
+	/**
+	 * Konstruktør for simulatoren
+	 * @param ip IP der skal forbindes til.
+	 */
+	public Functionality_Virtual(String ip) 
 		d = new DatabaseTransfer();
 		w = new Weight_Translate(ip);
 	}
 
 	/**
 	 * Kører flow for vægten.
+	 * se eventuelt beskrivelser i Functionality_Physical
 	 */
 	public void weightFlow(){
 		int userInput, batchInput;
 		double taraWeight, nettoWeight, bruttoWeight;
-		double testTaraWeight = 900;
-		double testBruttoWeight = 2100;
+		double testTaraWeight = 900; //Test data
+		double testBruttoWeight = 2100; //Test data
 
 		try {		
 			while(true) {

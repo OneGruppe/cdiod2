@@ -1,22 +1,30 @@
 package functionality;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import data.*;
+
+/**
+ * Functionality_Physical class last edited 11.03.2018 - 03.36
+ * @author Group 12
+ *  
+ */
 
 public class Functionality_Psysical implements IFunctionality {
 
 	private DatabaseTransfer d;
 	private Weight_Translate w;
 
+	/**
+	 * Konstruktør med den IP der ønskes at forbinde til
+	 * @param ip Den IP der skal forbindes til
+	 */
 	public Functionality_Psysical(String ip) {
-
 		d = new DatabaseTransfer();
 		w = new Weight_Translate(ip);
 	}
 
 	/**
-	 * Kører flow for vægten.
+	 * Kører det ønskede flow for vægten.
 	 */
 	public void weightFlow(){
 		int userInput, batchInput;
@@ -27,8 +35,8 @@ public class Functionality_Psysical implements IFunctionality {
 				// 1 - Vægten beder om, at der indtastes operatørnummer
 				// 2 - Operatøren indtaster sit brugernummer (område 11-99)
 				while (true) {
-					w.removeMsg();
-					userInput = w.getInputWithMsg("Indtast operatørnummer");
+					w.removeMsg(); //Fjerner besked på vægt, hvis der er en
+					userInput = w.getInputWithMsg("Indtast operatørnummer"); //Beder om operatør nummer
 					System.out.println(userInput);
 					w.removeMsg();
 					// 3 - Operatørens navn findes i databasen og vises på vægten

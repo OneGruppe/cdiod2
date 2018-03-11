@@ -155,7 +155,7 @@ public class Weight_Translate {
 			// S command retrieves weight
 			System.out.println("Running function getWeight()");
 			write.println("S");
-			System.out.println("getWeight successfully run");
+			System.out.println("getWeight ran successfully");
 
 			System.out.println("awaits response");
 			String response = read.readLine();
@@ -189,7 +189,7 @@ public class Weight_Translate {
 			System.out.println("Running function setTaraWeight()");
 			// T command retrieves weight
 			write.println("T");
-			System.out.println("function setTaraWeight successfully run");
+			System.out.println("function setTaraWeight ran successfully ");
 
 			System.out.println("Awaits response");
 			String response = read.readLine();
@@ -222,6 +222,20 @@ public class Weight_Translate {
 		} catch (IOException e) {
 			throw new WeightException("Error trying to get message");
 		}
+	}
+	
+	public void shutdownWeight(String q) throws WeightException, IOException{
+		// S command retrieves weight
+		System.out.println("Running function shutdownWeight()");
+		write.println(q);
+		System.out.println(read.readLine());
+		write.println("\n");
+		System.out.println(read.readLine());
+		System.out.println("shutdown ran successfully");
+	}
+	
+	public void setVirtualWeight(double wantedWeight) throws WeightException{
+		write.println("B " + wantedWeight);
 	}
 
 	public void closeAllLeaks() throws WeightException {

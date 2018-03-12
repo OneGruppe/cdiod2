@@ -9,7 +9,7 @@ package data;
 public class Database {
 	
 	// User - standardData
-	private int userID = 1; // Test ID
+	private int userID = 12; // Test ID
 	private String username = "Anders And"; //Test user
 	
 	// Batch - standardData

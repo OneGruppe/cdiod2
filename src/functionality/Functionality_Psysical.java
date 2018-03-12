@@ -86,8 +86,8 @@ public class Functionality_Psysical implements IFunctionality {
 
 				// 10 - Operatøren instrueres om, at placere tara (tom beholder)  på vægten
 				while (true) {
-
-					w.showLongMsg("Placer en tom beholder på vægten");
+					
+					w.showLongMsg("Placer tom beholder");
 
 					// 11 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
@@ -104,7 +104,7 @@ public class Functionality_Psysical implements IFunctionality {
 
 					// 12 - Tara’s vægt registreres
 					taraWeight = w.getWeight();
-					w.showLongMsg("Tara-vægt: " + taraWeight + "kg, registreret"); 
+					w.showLongMsg("Tara-vægt: " + taraWeight + "kg"); 
 					TimeUnit.SECONDS.sleep(2);
 					w.removeMsg();
 
@@ -121,7 +121,7 @@ public class Functionality_Psysical implements IFunctionality {
 
 				while(true) {
 					// 14 - Operatøren instrueres i at placere netto (beholder med produkt)  på vægten
-					w.showLongMsg("Placer beholder med produkt på vægten"); 
+					w.showLongMsg("Placer beholder med produkt"); 
 
 					// 15 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(3);
@@ -138,7 +138,7 @@ public class Functionality_Psysical implements IFunctionality {
 					// 16 - Nettovægt registreres
 					// 17 - Vægten tareres
 					nettoWeight = w.getWeight();
-					w.showLongMsg("Netto-vægt: " + nettoWeight + "kg, registreret"); 
+					w.showLongMsg("Netto-vægt: " + nettoWeight + "kg"); 
 					TimeUnit.SECONDS.sleep(4);
 					w.removeMsg();
 
@@ -161,7 +161,17 @@ public class Functionality_Psysical implements IFunctionality {
 					bruttoWeight = nettoWeight + taraWeight;
 
 					// 21 - Der udskrives OK eller kasseret på vægten
-					w.showLongMsg("Brutto: " + bruttoWeight + " kg, tast '1' = tilføj til batch, '2' = smides ud");
+					w.showLongMsg("Brutto: " + bruttoWeight + " kg");
+					
+					TimeUnit.SECONDS.sleep(3);
+					w.removeMsg();
+					
+					w.showLongMsg("tast '1' = tilføj til batch");
+					
+					TimeUnit.SECONDS.sleep(3);
+					w.removeMsg();
+					
+					w.showLongMsg("tast '2' = smides ud");
 
 					// 22 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(4);
@@ -189,7 +199,18 @@ public class Functionality_Psysical implements IFunctionality {
 				w.setVirtualWeight(0);
 				w.setTaraWeight();
 
-				w.showLongMsg("Process fuldført tast '1' + ok for at lukke program, '2' for at starte forfra");
+				w.showLongMsg("Process fuldført");
+				
+				TimeUnit.SECONDS.sleep(2);
+				w.removeMsg();
+				
+				w.showLongMsg("tast '1' + ok for at lukke program");
+				
+				TimeUnit.SECONDS.sleep(3);
+				w.removeMsg();
+				
+				w.showLongMsg("'2' for at starte forfra");
+				
 				TimeUnit.SECONDS.sleep(4);
 				int ok = w.getInputWithMsg("'1'=sluk,'2'=forfra");
 				if (ok == 1) {

@@ -203,9 +203,10 @@ public class Weight_Translate {
 	 * Trækker information om nuværende Tara-vægt
 	 *
 	 * @return Tara vægt i double
+	 * @throws InterruptedException 
 	 * @throws IOException
 	 */
-	public double setTaraWeight() throws WeightException {
+	public double setTaraWeight() throws WeightException, InterruptedException {
 
 		try {
 			System.out.println("\n*********************************************************");

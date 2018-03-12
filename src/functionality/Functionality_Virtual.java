@@ -19,7 +19,7 @@ public class Functionality_Virtual implements IFunctionality {
 	 * Konstruktør for simulatoren
 	 * @param ip IP der skal forbindes til.
 	 */
-	public Functionality_Virtual(String ip) 
+	public Functionality_Virtual(String ip) { 
 		d = new DatabaseTransfer();
 		w = new Weight_Translate(ip);
 	}

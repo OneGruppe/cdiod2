@@ -1,25 +1,51 @@
 package data;
 
+/**
+ * Database class last edited 11.03.2018 - 03.30
+ * @author Group 12
+ *
+ */
+
 public class Database {
 	
 	// User - standardData
-	private int userid = 1;
-	private String userName = "Anders And";
-	// Batch - standardData
-	private int batchid = 1234;
-	private String batchdesc = "Salt";
+	private int userID = 12; // Test ID
+	private String username = "Anders And"; //Test user
 	
-	protected int getUserid() {
-		return userid;
+	// Batch - standardData
+	private int batchID = 1234; //Test batch
+	private String batchDesc = "Salt"; //Test description for batch
+	
+	/**
+	 * Getter til UserID
+	 * @return UserID
+	 */
+	protected int getUserID() {
+		return userID;
 	}
-	protected String getUserName() {
-		return userName;
+	
+	/**
+	 * Getter til username
+	 * @return Username
+	 */
+	protected String getUsername() {
+		return username;
 	}
-	protected int getBatchid() {
-		return batchid;
+	
+	/**
+	 * Getter til batch ID
+	 * @return Batch ID
+	 */
+	protected int getBatchID() {
+		return batchID;
 	}
-	protected String getBatchdesc() {
-		return batchdesc;
+	
+	/**
+	 * Getter til batch description
+	 * @return Batch description
+	 */
+	protected String getBatchDesc() {
+		return batchDesc;
 	}
 	
 }

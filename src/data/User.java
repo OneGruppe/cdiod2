@@ -10,7 +10,7 @@ public class User {
 
 	private int id;
 	private String name;
-	
+
 	/**
 	 * Konstruktør for User objekt med ID og navn
 	 * @param id ID til brugeren
@@ -36,5 +36,5 @@ public class User {
 	public String getName() {
 		return name;
 	}
-	
+
 }

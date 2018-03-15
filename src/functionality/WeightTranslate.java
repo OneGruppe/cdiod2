@@ -12,7 +12,7 @@ import java.net.Socket;
  *
  */
 
-public class Weight_Translate {
+public class WeightTranslate {
 
 	// declare socket to open connection to TCP/Telnet
 	// declare Writer and reader for I/O
@@ -26,7 +26,7 @@ public class Weight_Translate {
 	 * Konstruktør tager imod IP og forbinder til den ønskede IP
 	 * @param ip IP'en der skal forbindes til
 	 */
-	public Weight_Translate(String ip) {
+	public WeightTranslate(String ip) {
 
 		try {
 			// create socket connection with ip and port, delivered from Main
@@ -305,7 +305,7 @@ public class Weight_Translate {
 			read.close();
 			System.out.println("All leaks successfully closed");
 			System.out.println("---------------------------------------------------------\n");
-			
+
 		} catch (IOException e) {
 			System.out.println("\n   !! !! !! !! !! !! !! ERROR !! !! !! !! !! !! !!   \n");
 			throw new WeightException("Could not close connection");

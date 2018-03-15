@@ -11,7 +11,7 @@ public class Batch {
 	private int id;
 	private String desc;
 	private double bruttoWeight;
-	
+
 	/**
 	 * Konstruktør til batch der indeholder
 	 * @param id ID af batch

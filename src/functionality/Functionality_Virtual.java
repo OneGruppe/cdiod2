@@ -1,42 +1,47 @@
 package functionality;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
 import data.*;
 
 /**
- * Functionality_Physical class last edited 11.03.2018 - 03.36
+ * Functionality_Virtual class last edited 11.03.2018 - 03.46
  * @author Group 12
  *  
  */
 
-public class FunctionalityPhysical implements IFunctionality {
+public class Functionality_Virtual implements IFunctionality {
 
 	private DatabaseTransfer d;
-	private WeightTranslate w;
+	private Weight_Translate w;
 
 	/**
-	 * Konstruktør med den IP der ønskes at forbinde til
-	 * @param ip Den IP der skal forbindes til
+	 * Konstruktør for simulatoren
+	 * @param ip IP der skal forbindes til.
 	 */
-	public FunctionalityPhysical(String ip) {
+	public Functionality_Virtual(String ip) { 
 		d = new DatabaseTransfer();
-		w = new WeightTranslate(ip);
+		w = new Weight_Translate(ip);
 	}
 
 	/**
-	 * Kører det ønskede flow for vægten.
+	 * Kører flow for vægten.
+	 * se eventuelt beskrivelser i Functionality_Physical
 	 */
 	public void weightFlow(){
 		int userInput, batchInput;
 		double taraWeight, nettoWeight, bruttoWeight;
+		double testTaraWeight = 900; //Test data
+		double testBruttoWeight = 2100; //Test data
+
 		try {		
 			while(true) {
 
 				// 1 - Vægten beder om, at der indtastes operatørnummer
 				// 2 - Operatøren indtaster sit brugernummer (område 11-99)
 				while (true) {
-					w.removeMsg(); //Fjerner besked på vægt, hvis der er en
-					userInput = w.getInputWithMsg("Indtast operatørnummer"); //Beder om operatør nummer
+					w.removeMsg();
+					userInput = w.getInputWithMsg("Indtast operatørnummer");
 					System.out.println(userInput);
 					w.removeMsg();
 					// 3 - Operatørens navn findes i databasen og vises på vægten
@@ -87,7 +92,7 @@ public class FunctionalityPhysical implements IFunctionality {
 				// 10 - Operatøren instrueres om, at placere tara (tom beholder)  på vægten
 				while (true) {
 
-					w.showLongMsg("Placer tom beholder");
+					w.showLongMsg("Placer en tom beholder på vægten");
 
 					// 11 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(2);
@@ -103,8 +108,9 @@ public class FunctionalityPhysical implements IFunctionality {
 				while(true) {
 
 					// 12 - Tara’s vægt registreres
+					w.setVirtualWeight(testTaraWeight);
 					taraWeight = w.getWeight();
-					w.showLongMsg("Tara-vægt: " + taraWeight + "kg"); 
+					w.showLongMsg("Tara-vægt: " + taraWeight + "kg, registreret"); 
 					TimeUnit.SECONDS.sleep(2);
 					w.removeMsg();
 
@@ -121,7 +127,7 @@ public class FunctionalityPhysical implements IFunctionality {
 
 				while(true) {
 					// 14 - Operatøren instrueres i at placere netto (beholder med produkt)  på vægten
-					w.showLongMsg("Placer beholder med produkt"); 
+					w.showLongMsg("Placer beholder med produkt på vægten"); 
 
 					// 15 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(3);
@@ -137,8 +143,9 @@ public class FunctionalityPhysical implements IFunctionality {
 
 					// 16 - Nettovægt registreres
 					// 17 - Vægten tareres
+					w.setVirtualWeight(testBruttoWeight);
 					nettoWeight = w.getWeight();
-					w.showLongMsg("Netto-vægt: " + nettoWeight + "kg"); 
+					w.showLongMsg("Netto-vægt: " + nettoWeight + "kg, registreret"); 
 					TimeUnit.SECONDS.sleep(4);
 					w.removeMsg();
 
@@ -161,17 +168,7 @@ public class FunctionalityPhysical implements IFunctionality {
 					bruttoWeight = nettoWeight + taraWeight;
 
 					// 21 - Der udskrives OK eller kasseret på vægten
-					w.showLongMsg("Brutto: " + bruttoWeight + " kg");
-
-					TimeUnit.SECONDS.sleep(3);
-					w.removeMsg();
-
-					w.showLongMsg("tast '1' = tilføj til batch");
-
-					TimeUnit.SECONDS.sleep(3);
-					w.removeMsg();
-
-					w.showLongMsg("tast '2' = smides ud");
+					w.showLongMsg("Brutto: " + bruttoWeight + " kg, tast '1' = tilføj til batch, '2' = smides ud");
 
 					// 22 - Operatøren kvitterer
 					TimeUnit.SECONDS.sleep(4);
@@ -196,24 +193,14 @@ public class FunctionalityPhysical implements IFunctionality {
 				}
 
 				// 23 - Vægten tareres
+				w.setVirtualWeight(0);
 				w.setTaraWeight();
 
-				w.showLongMsg("Process fuldført");
-
-				TimeUnit.SECONDS.sleep(2);
-				w.removeMsg();
-
-				w.showLongMsg("tast '1' + ok for at lukke program");
-
-				TimeUnit.SECONDS.sleep(3);
-				w.removeMsg();
-
-				w.showLongMsg("'2' for at starte forfra");
-
+				w.showLongMsg("Process fuldført tast '1' + ok for at lukke program, '2' for at starte forfra");
 				TimeUnit.SECONDS.sleep(4);
 				int ok = w.getInputWithMsg("'1'=sluk,'2'=forfra");
 				if (ok == 1) {
-					w.shutdownWeight(2);
+					w.shutdownWeight(1);
 					w.closeAllLeaks();
 					System.exit(0);
 				}

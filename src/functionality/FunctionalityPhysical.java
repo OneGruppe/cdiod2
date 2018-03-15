@@ -9,18 +9,18 @@ import data.*;
  *  
  */
 
-public class Functionality_Psysical implements IFunctionality {
+public class FunctionalityPhysical implements IFunctionality {
 
 	private DatabaseTransfer d;
-	private Weight_Translate w;
+	private WeightTranslate w;
 
 	/**
 	 * Konstruktør med den IP der ønskes at forbinde til
 	 * @param ip Den IP der skal forbindes til
 	 */
-	public Functionality_Psysical(String ip) {
+	public FunctionalityPhysical(String ip) {
 		d = new DatabaseTransfer();
-		w = new Weight_Translate(ip);
+		w = new WeightTranslate(ip);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class Functionality_Psysical implements IFunctionality {
 
 				// 10 - Operatøren instrueres om, at placere tara (tom beholder)  på vægten
 				while (true) {
-					
+
 					w.showLongMsg("Placer tom beholder");
 
 					// 11 - Operatøren kvitterer
@@ -162,15 +162,15 @@ public class Functionality_Psysical implements IFunctionality {
 
 					// 21 - Der udskrives OK eller kasseret på vægten
 					w.showLongMsg("Brutto: " + bruttoWeight + " kg");
-					
+
 					TimeUnit.SECONDS.sleep(3);
 					w.removeMsg();
-					
+
 					w.showLongMsg("tast '1' = tilføj til batch");
-					
+
 					TimeUnit.SECONDS.sleep(3);
 					w.removeMsg();
-					
+
 					w.showLongMsg("tast '2' = smides ud");
 
 					// 22 - Operatøren kvitterer
@@ -196,21 +196,20 @@ public class Functionality_Psysical implements IFunctionality {
 				}
 
 				// 23 - Vægten tareres
-				w.setVirtualWeight(0);
 				w.setTaraWeight();
 
 				w.showLongMsg("Process fuldført");
-				
+
 				TimeUnit.SECONDS.sleep(2);
 				w.removeMsg();
-				
+
 				w.showLongMsg("tast '1' + ok for at lukke program");
-				
+
 				TimeUnit.SECONDS.sleep(3);
 				w.removeMsg();
-				
+
 				w.showLongMsg("'2' for at starte forfra");
-				
+
 				TimeUnit.SECONDS.sleep(4);
 				int ok = w.getInputWithMsg("'1'=sluk,'2'=forfra");
 				if (ok == 1) {

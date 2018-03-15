@@ -10,18 +10,18 @@ import data.*;
  *  
  */
 
-public class Functionality_Virtual implements IFunctionality {
+public class FunctionalityVirtual implements IFunctionality {
 
 	private DatabaseTransfer d;
-	private Weight_Translate w;
+	private WeightTranslate w;
 
 	/**
 	 * Konstruktør for simulatoren
 	 * @param ip IP der skal forbindes til.
 	 */
-	public Functionality_Virtual(String ip) { 
+	public FunctionalityVirtual(String ip) { 
 		d = new DatabaseTransfer();
-		w = new Weight_Translate(ip);
+		w = new WeightTranslate(ip);
 	}
 
 	/**

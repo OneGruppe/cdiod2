@@ -35,8 +35,8 @@ public class Functionality_Physical implements IFunctionality {
 				// 1 - Vægten beder om, at der indtastes operatørnummer
 				// 2 - Operatøren indtaster sit brugernummer (område 11-99)
 				while (true) {
-					w.removeMsg(); //Fjerner besked på vægt, hvis der er en
-					userInput = w.getInputWithMsg("Indtast operatørnummer"); //Beder om operatør nummer
+					w.removeMsg();
+					userInput = w.getInputWithMsg("Indtast operatoernr."); //Beder om operatør nummer
 					System.out.println(userInput);
 					w.removeMsg();
 					// 3 - Operatørens navn findes i databasen og vises på vægten
@@ -180,14 +180,14 @@ public class Functionality_Physical implements IFunctionality {
 
 					w.removeMsg();
 					if (ok == 1) {
-						w.showLongMsg("Bruttovægten er gemt i batch");
+						w.showLongMsg("Bruttovaegten er gemt i batch");
 						d.batchInDatabase(batchInput).addBruttoWeight(bruttoWeight);
 						TimeUnit.SECONDS.sleep(2);
 						w.removeMsg();
 						break;
 					}
 					if (ok == 2) {
-						w.showLongMsg("Bruttovægten er fjernet fra batch");
+						w.showLongMsg("Bruttovaegten er fjernet fra batch");
 						d.batchInDatabase(batchInput).addBruttoWeight(bruttoWeight * (-1));
 						TimeUnit.SECONDS.sleep(2);
 						w.removeMsg();
@@ -198,7 +198,7 @@ public class Functionality_Physical implements IFunctionality {
 				// 23 - Vægten tareres
 				w.setTaraWeight();
 
-				w.showLongMsg("Process fuldført");
+				w.showLongMsg("Process fuldfoert");
 
 				TimeUnit.SECONDS.sleep(2);
 				w.removeMsg();
